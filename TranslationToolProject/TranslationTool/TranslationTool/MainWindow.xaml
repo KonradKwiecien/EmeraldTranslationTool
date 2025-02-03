@@ -6,10 +6,54 @@
     xmlns:local="using:TranslationTool"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:TranslationTool.ViewModel"
     mc:Ignorable="d"
     Title="TranslationTool">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-    </StackPanel>
+  <Grid x:Name="root">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- Main menu -->
+    <MenuBar>
+      <MenuBarItem Title="File">
+        <MenuFlyoutSubItem Text="Open" Icon="OpenFile" >
+          <MenuFlyoutItem Text="JSON file" Command="{x:Bind ViewModel.OpenJSONFileCommand}">
+            <MenuFlyoutItem.KeyboardAccelerators>
+              <KeyboardAccelerator Modifiers="Control,Shift" Key="J"/>
+            </MenuFlyoutItem.KeyboardAccelerators>
+          </MenuFlyoutItem>
+          <MenuFlyoutItem Text="XML file">
+            <MenuFlyoutItem.KeyboardAccelerators>
+              <KeyboardAccelerator Modifiers="Control,Shift" Key="X"/>
+            </MenuFlyoutItem.KeyboardAccelerators>
+          </MenuFlyoutItem>
+        </MenuFlyoutSubItem>
+        <MenuFlyoutItem Text="Save">
+          <MenuFlyoutItem.KeyboardAccelerators>
+            <KeyboardAccelerator Modifiers="Control" Key="S"/>
+          </MenuFlyoutItem.KeyboardAccelerators>
+        </MenuFlyoutItem>
+        <MenuFlyoutSeparator/>
+        <MenuFlyoutItem Text="Exit"/>
+      </MenuBarItem>
+
+      <MenuBarItem Title="Help">
+        <MenuFlyoutItem Text="About"/>
+      </MenuBarItem>
+    </MenuBar>
+
+    <TextBlock Grid.Row="1" x:Name="JSONTextBlock" Text="{x:Bind ViewModel.JSONFileContext, Mode=TwoWay}"
+               TextWrapping="Wrap" IsTextSelectionEnabled="True">
+      
+    </TextBlock>
+
+    <!-- Statusbar -->
+    <Border Grid.Row="2" Background="#444">
+      <TextBlock Text=" (c) Translation Tool 2025" Foreground="White" Margin="5"/>
+    </Border>
+  </Grid>
 </Window>
