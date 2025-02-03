@@ -13,6 +13,7 @@
   <Grid x:Name="root">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
@@ -20,7 +21,7 @@
     <!-- Main menu -->
     <MenuBar>
       <MenuBarItem Title="File">
-        <MenuFlyoutSubItem Text="Open" Icon="OpenFile" >
+        <MenuFlyoutSubItem Text="Open" Icon="OpenFile">
           <MenuFlyoutItem Text="JSON file" Command="{x:Bind ViewModel.OpenJSONFileCommand}">
             <MenuFlyoutItem.KeyboardAccelerators>
               <KeyboardAccelerator Modifiers="Control,Shift" Key="J"/>
@@ -40,19 +41,33 @@
         <MenuFlyoutSeparator/>
         <MenuFlyoutItem Text="Exit"/>
       </MenuBarItem>
-
       <MenuBarItem Title="Help">
         <MenuFlyoutItem Text="About"/>
       </MenuBarItem>
     </MenuBar>
 
-    <TextBlock Grid.Row="1" x:Name="JSONTextBlock" Text="{x:Bind ViewModel.JSONFileContext, Mode=TwoWay}"
+    <!-- Command bar -->
+    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left">
+      <CommandBar Background="Transparent">
+        <AppBarButton Width="35" ToolTipService.Placement="Bottom"  ToolTipService.ToolTip="qqqqqq" Icon="OpenFile" Label="Open"/>
+        <AppBarButton Width="35" Icon="Save" Label="Save"/>
+      </CommandBar>
+      <CommandBar x:Name="commandBarJsonFile" 
+                  Visibility="{x:Bind ViewModel.CommandBarJsonVisibility, Mode=OneWay}" 
+                  DefaultLabelPosition="Right" Background="Transparent">
+        <AppBarSeparator />
+        <AppBarButton Icon="FontDecrease" Label="Decrease"/>
+        <AppBarButton Icon="FontIncrease" Label="Increase"/>
+      </CommandBar>
+    </StackPanel>
+
+    <TextBlock Grid.Row="2" x:Name="JSONTextBlock" Text="{x:Bind ViewModel.JSONFileContext, Mode=TwoWay}"
                TextWrapping="Wrap" IsTextSelectionEnabled="True">
-      
+      No file loaded...
     </TextBlock>
 
     <!-- Statusbar -->
-    <Border Grid.Row="2" Background="#444">
+    <Border Grid.Row="3" Background="{StaticResource StatusbarBackgroundBrush}">
       <TextBlock Text=" (c) Translation Tool 2025" Foreground="White" Margin="5"/>
     </Border>
   </Grid>
