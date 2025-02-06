@@ -6,7 +6,7 @@ namespace TranslationTool
 {
   public partial class App : Application
   {
-    private Window? m_window;
+    static public Window? MainWindow;
     private readonly ServiceProvider _serviceProvider;
 
     public App()
@@ -15,6 +15,9 @@ namespace TranslationTool
       ServiceCollection services = new();
       ConfigureServices(services);
       _serviceProvider = services.BuildServiceProvider();
+
+      // Returns an instance of MainViewModel
+      // _serviceProvider.GetService<MainViewModel>();
     }
 
     private void ConfigureServices(ServiceCollection services)
@@ -25,8 +28,8 @@ namespace TranslationTool
 
     protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
     {
-      m_window = _serviceProvider.GetService<MainWindow>();
-      m_window?.Activate();
+      MainWindow = _serviceProvider.GetService<MainWindow>();
+      MainWindow?.Activate();
     }
   }
 }

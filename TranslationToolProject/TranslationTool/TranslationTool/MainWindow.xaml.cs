@@ -1,5 +1,8 @@
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using System;
 using TranslationTool.ViewModel;
+using Windows.Storage.Pickers;
 
 namespace TranslationTool
 {
@@ -12,5 +15,12 @@ namespace TranslationTool
       this.InitializeComponent();
       ViewModel = viewModel;
     }
+
+    private void TheneSwitch_Toggled(object sender, RoutedEventArgs e)
+    {
+      root.RequestedTheme = root.RequestedTheme == ElementTheme.Light
+       ? ElementTheme.Dark : ElementTheme.Light;
+    }
   }
 }
+

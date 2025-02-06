@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="TestWinUI3.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TestWinUI3"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="using:TestWinUI3.Converter"
+    mc:Ignorable="d"
+    Title="TestWinUI3">
+
+  <StackPanel Margin="10">
+    <StackPanel.Resources>
+      <converter:YesNoToBooleanConverter x:Key="YesNoToBooleanConverter" />
+    </StackPanel.Resources>
+    <TextBox x:Name="txtValue" Header="Enter yes/no or tak/nie" Margin="0, 10, 0, 10" />
+    <StackPanel Orientation="Horizontal">
+      <TextBlock Text="Current value is: "/>
+      <TextBlock Text="{Binding ElementName=txtValue, Mode=TwoWay, Path=Text, Converter={StaticResource YesNoToBooleanConverter}}"/>
+    </StackPanel>
+    <CheckBox IsChecked="{Binding ElementName=txtValue, Mode=TwoWay, Path=Text, Converter={StaticResource YesNoToBooleanConverter}}" 
+              Content="Yes" />
+  </StackPanel>
+</Window>

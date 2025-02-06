@@ -1,12 +1,27 @@
-﻿using WTranslationTool.Command;
+﻿using Microsoft.UI.Xaml.Controls;
+using System;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using WTranslationTool.Command;
 
 namespace TranslationTool.ViewModel
 {
-  public class MainViewModel: ViewModelBase
+  public class MainViewModel : ViewModelBase
   {
     private string? _JSONFileContext;
+    private bool _CBJsonFileVisibility;
 
-    public bool CommandBarJsonVisibility => _JSONFileContext is not null;
+    public bool CBJsonFileVisibility
+    {
+      get => _CBJsonFileVisibility;
+      set
+      {
+        _CBJsonFileVisibility = value;
+        RaisePropertyChanged();
+      }
+    }
 
     public string? JSONFileContext
     {
@@ -14,21 +29,42 @@ namespace TranslationTool.ViewModel
       set
       {
         _JSONFileContext = value;
-        RaisePropertyChanged();
-        RaisePropertyChanged(nameof(CommandBarJsonVisibility));
+        CBJsonFileVisibility = true;
+        RaisePropertyChanged();        
       }
     }
 
-    public DelegateCommand OpenJSONFileCommand { get; }
+    public ICommand OpenJSONFileCommand { get; }
+
+    public string TestLabel { get; set; } = "TestLabel";
 
     public MainViewModel()
     {
-      OpenJSONFileCommand = new DelegateCommand(OpenJSONFile);
+      OpenJSONFileCommand = new DelegateCommand(OpenJSONFileAsync);
     }
 
-    private void OpenJSONFile(object? parameter)
+    private async void OpenJSONFileAsync(object? parameter)
     {
-      JSONFileContext = "File Loaded";
+      //JSONFileContext = "File Loaded";
+      // Create a file picker
+      var openPicker = new FileOpenPicker();
+
+      // Retrieve the window handle (HWND) of the current WinUI 3 window.
+      var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
+
+      // Initialize the file picker with the window handle (HWND).
+      WinRT.Interop.InitializeWithWindow.Initialize(openPicker, hWnd);
+
+      // Set options for your file picker
+      openPicker.ViewMode = PickerViewMode.List;
+      openPicker.FileTypeFilter.Add(".json");
+
+      // Open the picker for the user to pick a file
+      var selectedFile = await openPicker.PickSingleFileAsync();
+      if (selectedFile != null)
+      {
+        var lines = await FileIO.ReadLinesAsync(selectedFile);
+      }
     }
   }
 }

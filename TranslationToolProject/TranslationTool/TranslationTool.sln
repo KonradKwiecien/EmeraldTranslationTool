@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslationTool", "TranslationTool\TranslationTool.csproj", "{4239B63E-A046-4F61-9E04-A1DC02F88B1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWinUI3", "TestWinUI3\TestWinUI3.csproj", "{36904BCF-361B-4EDA-9177-80A8E42247AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,24 @@ Global
 		{4239B63E-A046-4F61-9E04-A1DC02F88B1D}.Release|x86.ActiveCfg = Release|x86
 		{4239B63E-A046-4F61-9E04-A1DC02F88B1D}.Release|x86.Build.0 = Release|x86
 		{4239B63E-A046-4F61-9E04-A1DC02F88B1D}.Release|x86.Deploy.0 = Release|x86
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Debug|ARM64.Build.0 = Debug|ARM64
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Debug|x64.ActiveCfg = Debug|x64
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Debug|x64.Build.0 = Debug|x64
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Debug|x64.Deploy.0 = Debug|x64
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Debug|x86.ActiveCfg = Debug|x86
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Debug|x86.Build.0 = Debug|x86
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Debug|x86.Deploy.0 = Debug|x86
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Release|ARM64.ActiveCfg = Release|ARM64
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Release|ARM64.Build.0 = Release|ARM64
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Release|ARM64.Deploy.0 = Release|ARM64
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Release|x64.ActiveCfg = Release|x64
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Release|x64.Build.0 = Release|x64
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Release|x64.Deploy.0 = Release|x64
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Release|x86.ActiveCfg = Release|x86
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Release|x86.Build.0 = Release|x86
+		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,7 +10,8 @@
     mc:Ignorable="d"
     Title="TranslationTool">
 
-  <Grid x:Name="root">
+  <Grid x:Name="root" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
@@ -47,19 +48,30 @@
     </MenuBar>
 
     <!-- Command bar -->
-    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left">
-      <CommandBar Background="Transparent">
-        <AppBarButton Width="35" ToolTipService.Placement="Bottom"  ToolTipService.ToolTip="qqqqqq" Icon="OpenFile" Label="Open"/>
-        <AppBarButton Width="35" Icon="Save" Label="Save"/>
-      </CommandBar>
-      <CommandBar x:Name="commandBarJsonFile" 
-                  Visibility="{x:Bind ViewModel.CommandBarJsonVisibility, Mode=OneWay}" 
-                  DefaultLabelPosition="Right" Background="Transparent">
-        <AppBarSeparator />
-        <AppBarButton Icon="FontDecrease" Label="Decrease"/>
-        <AppBarButton Icon="FontIncrease" Label="Increase"/>
-      </CommandBar>
-    </StackPanel>
+    <Grid Grid.Row="1" Margin="5 0 0 0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <StackPanel x:Name="commandBarPanel" Orientation="Horizontal">
+        <!-- Common commands -->
+        <StackPanel x:Name="commonCommandBarPanel" Orientation="Horizontal">
+          <AppBarButton Icon="OpenFile" Command="{x:Bind ViewModel.OpenJSONFileCommand}"/>
+          <AppBarButton Icon="Save"/>
+        </StackPanel>
+        <!-- Commands for JSON file -->
+        <StackPanel Grid.Column="1" x:Name="commandBarJsonFile" Orientation="Horizontal"
+                    Visibility="{x:Bind ViewModel.CBJsonFileVisibility, Mode=OneWay}">
+          <AppBarButton Icon="FontDecrease"/>
+          <AppBarButton Icon="FontIncrease"/>
+          <AppBarButton Icon="ShowResults"/>
+        </StackPanel>
+      </StackPanel>
+
+      <ToggleSwitch Grid.Column="1" OffContent="Dark" OnContent="Light" IsOn="False"
+                    HorizontalAlignment="Right" Toggled="TheneSwitch_Toggled"/>
+    </Grid>
 
     <TextBlock Grid.Row="2" x:Name="JSONTextBlock" Text="{x:Bind ViewModel.JSONFileContext, Mode=TwoWay}"
                TextWrapping="Wrap" IsTextSelectionEnabled="True">
