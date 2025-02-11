@@ -17,9 +17,9 @@
     <TextBox x:Name="txtValue" Header="Enter yes/no or tak/nie" Margin="0, 10, 0, 10" />
     <StackPanel Orientation="Horizontal">
       <TextBlock Text="Current value is: "/>
-      <TextBlock Text="{Binding ElementName=txtValue, Mode=TwoWay, Path=Text, Converter={StaticResource YesNoToBooleanConverter}}"/>
+      <TextBlock Text="{Binding ElementName=txtValue, Path=Text, Mode=TwoWay,  Converter={StaticResource YesNoToBooleanConverter}}"/>
     </StackPanel>
-    <CheckBox IsChecked="{Binding ElementName=txtValue, Mode=TwoWay, Path=Text, Converter={StaticResource YesNoToBooleanConverter}}" 
+    <CheckBox IsChecked="{Binding ElementName=txtValue, Path=Text, Mode=TwoWay, Converter={StaticResource YesNoToBooleanConverter}}" 
               Content="Yes" />
   </StackPanel>
 </Window>

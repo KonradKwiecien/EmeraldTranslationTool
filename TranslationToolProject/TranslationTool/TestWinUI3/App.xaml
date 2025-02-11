@@ -3,14 +3,16 @@
     x:Class="TestWinUI3.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="using:TestWinUI3.Converter"
     xmlns:local="using:TestWinUI3">
-    <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-                <!-- Other merged dictionaries here -->
-            </ResourceDictionary.MergedDictionaries>
-            <!-- Other app resources here -->
-        </ResourceDictionary>
-    </Application.Resources>
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+        <!-- Other merged dictionaries here -->
+      </ResourceDictionary.MergedDictionaries>
+      <!-- Other app resources here -->
+      <!--<converter:YesNoToBooleanConverter x:Key="YesNoToBooleanConverter" />-->
+    </ResourceDictionary>
+  </Application.Resources>
 </Application>

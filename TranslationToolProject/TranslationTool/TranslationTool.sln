@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslationTool", "Translat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWinUI3", "TestWinUI3\TestWinUI3.csproj", "{36904BCF-361B-4EDA-9177-80A8E42247AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLTest", "XMLTest\XMLTest.csproj", "{E68FBBCC-36B8-4925-8CA4-B26C09FF2A39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -53,6 +55,18 @@ Global
 		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Release|x86.ActiveCfg = Release|x86
 		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Release|x86.Build.0 = Release|x86
 		{36904BCF-361B-4EDA-9177-80A8E42247AB}.Release|x86.Deploy.0 = Release|x86
+		{E68FBBCC-36B8-4925-8CA4-B26C09FF2A39}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{E68FBBCC-36B8-4925-8CA4-B26C09FF2A39}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{E68FBBCC-36B8-4925-8CA4-B26C09FF2A39}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E68FBBCC-36B8-4925-8CA4-B26C09FF2A39}.Debug|x64.Build.0 = Debug|Any CPU
+		{E68FBBCC-36B8-4925-8CA4-B26C09FF2A39}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E68FBBCC-36B8-4925-8CA4-B26C09FF2A39}.Debug|x86.Build.0 = Debug|Any CPU
+		{E68FBBCC-36B8-4925-8CA4-B26C09FF2A39}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{E68FBBCC-36B8-4925-8CA4-B26C09FF2A39}.Release|ARM64.Build.0 = Release|Any CPU
+		{E68FBBCC-36B8-4925-8CA4-B26C09FF2A39}.Release|x64.ActiveCfg = Release|Any CPU
+		{E68FBBCC-36B8-4925-8CA4-B26C09FF2A39}.Release|x64.Build.0 = Release|Any CPU
+		{E68FBBCC-36B8-4925-8CA4-B26C09FF2A39}.Release|x86.ActiveCfg = Release|Any CPU
+		{E68FBBCC-36B8-4925-8CA4-B26C09FF2A39}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

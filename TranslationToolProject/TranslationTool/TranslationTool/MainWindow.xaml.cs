@@ -14,6 +14,12 @@ namespace TranslationTool
     {
       this.InitializeComponent();
       ViewModel = viewModel;
+      root.Loaded += Root_Loaded; ;
+    }
+
+    private async void Root_Loaded(object sender, RoutedEventArgs e)
+    {
+      ViewModel.LoadTranslations();
     }
 
     private void TheneSwitch_Toggled(object sender, RoutedEventArgs e)

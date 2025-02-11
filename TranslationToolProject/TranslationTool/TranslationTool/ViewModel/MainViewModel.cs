@@ -1,7 +1,10 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TranslationTool.Data;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using WTranslationTool.Command;
@@ -10,6 +13,8 @@ namespace TranslationTool.ViewModel
 {
   public class MainViewModel : ViewModelBase
   {
+    private readonly IPOSClientLocalizedResourceProvider _pOSClientLocalizedResourceProvider;
+
     private string? _JSONFileContext;
     private bool _CBJsonFileVisibility;
 
@@ -30,7 +35,7 @@ namespace TranslationTool.ViewModel
       {
         _JSONFileContext = value;
         CBJsonFileVisibility = true;
-        RaisePropertyChanged();        
+        RaisePropertyChanged();
       }
     }
 
@@ -38,9 +43,16 @@ namespace TranslationTool.ViewModel
 
     public string TestLabel { get; set; } = "TestLabel";
 
-    public MainViewModel()
+    public MainViewModel(IPOSClientLocalizedResourceProvider pOSClientLocalizedResourceProvider)
     {
+      _pOSClientLocalizedResourceProvider = pOSClientLocalizedResourceProvider;
+
       OpenJSONFileCommand = new DelegateCommand(OpenJSONFileAsync);
+    }
+
+    public void LoadTranslations()
+    {
+      List<string>? translations = _pOSClientLocalizedResourceProvider.GetAllTrsnslations();
     }
 
     private async void OpenJSONFileAsync(object? parameter)

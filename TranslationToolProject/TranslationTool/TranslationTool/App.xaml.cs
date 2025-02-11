@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
+using TranslationTool.Data;
 using TranslationTool.ViewModel;
 
 namespace TranslationTool
@@ -24,6 +25,7 @@ namespace TranslationTool
     {
       services.AddTransient<MainWindow>();
       services.AddTransient<MainViewModel>();
+      services.AddTransient<IPOSClientLocalizedResourceProvider, POSClientLocalizedResourceProvider>();
     }
 
     protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
