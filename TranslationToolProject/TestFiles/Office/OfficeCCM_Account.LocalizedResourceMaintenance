@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalizedResourceMaintenanceRequest xmlns="http://retalix.com/R10/services" MajorVersion="10" MinorVersion="3">
+    <RequestHeader>
+        <MessageId>5</MessageId>
+    </RequestHeader>
+    <LocalizedResources>
+        <UpdateResourceSet applicationId="OfficeCCM" version="24.3.0" culture="de-DE">
+            <ResourcePackage context="Account" format="resx">
+                <Data>
+                    <root>
+                        <resheader name="resmimetype">
+                            <value>text/microsoft-resx</value>
+                        </resheader>
+                        <resheader name="version">
+                            <value>2.0</value>
+                        </resheader>
+                        <resheader name="reader">
+                            <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+                        </resheader>
+                        <resheader name="writer">
+                            <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+                        </resheader>
+                        <data name="AccountViewModel" xml:space="preserve">
+							<value>Konten</value>
+						</data>
+                        <data name="AccountViewModelWithMetaData" xml:space="preserve">
+							<value>Konten</value>
+						</data>
+                        <data name="DefaultMessageLine1" xml:space="preserve">
+							<value>Filiale auswählen und "Suchen" betätigen, um vorhandene Einträge anzuzeigen.</value>
+						</data>
+                        <data name="DefaultMessageLine2" xml:space="preserve">
+							<value></value>
+						</data>
+                        <data name="DefaultWorkAreaTitle" xml:space="preserve">
+							<value>Cash Office Konten</value>
+						</data>
+                        <data name="Description" xml:space="preserve">
+							<value>Beschreibung</value>
+						</data>
+                        <data name="FirstViewMessage" xml:space="preserve">
+							<value>Please Select Store</value>
+						</data>
+                        <data name="Name" xml:space="preserve">
+							<value>Name</value>
+						</data>
+                        <data name="ProfileExternalId" xml:space="preserve">
+							<value>Kontenprofil</value>
+						</data>
+                        <data name="Store" xml:space="preserve">
+							<value>Filiale</value>
+						</data>
+                        <data name="StoreId" xml:space="preserve">
+							<value>Filialnummer</value>
+						</data>
+                        <data name="StoreMissingMessage" xml:space="preserve">
+							<value>Bitte Filialnummer wählen</value>
+						</data>
+                        <data name="SubmittedMessageLine1" xml:space="preserve">
+							<value>No Accounts to view at the selected Store.</value>
+						</data>
+                        <data name="SubmittedMessageLine2" xml:space="preserve">
+							<value>Add a new Account by clicking on the "Add New" button.</value>
+						</data>
+                        <data name="TouchPointGroupOpenLoan" xml:space="preserve">
+							<value>Zuordnung Wechselgeldanfangsbestand</value>
+						</data>
+                        <data name="TouchpointGroups" xml:space="preserve">
+							<value>Touchpoint Groups</value>
+						</data>
+                        <data name="TouchPointGroupSystemPickup" xml:space="preserve">
+							<value>Zuordnung Systemabschöpfung</value>
+						</data>
+                        <data name="TouchPointGroupTenderLoan" xml:space="preserve">
+							<value>Zuordnung Wechselgeld</value>
+						</data>
+                        <data name="TouchPointGroupTenderPickup" xml:space="preserve">
+							<value>Zuordnung Abschöpfung</value>
+						</data>
+						<data name="FullName" xml:space="preserve">
+							<value>Name</value>
+						</data>
+
+                    </root>
+                </Data>
+            </ResourcePackage>
+        </UpdateResourceSet>
+    </LocalizedResources>
+</LocalizedResourceMaintenanceRequest>

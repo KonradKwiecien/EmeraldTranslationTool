@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalizedResourceMaintenanceRequest xmlns="http://retalix.com/R10/services" MajorVersion="10" MinorVersion="3">
+    <RequestHeader>
+        <MessageId>5</MessageId>
+    </RequestHeader>
+    <LocalizedResources>
+        <UpdateResourceSet applicationId="OfficeCCM" version="24.3.0" culture="de-DE">
+            <ResourcePackage context="AccountProfiles" format="resx">
+                <Data>
+                    <root>
+                        <resheader name="resmimetype">
+                            <value>text/microsoft-resx</value>
+                        </resheader>
+                        <resheader name="version">
+                            <value>2.0</value>
+                        </resheader>
+                        <resheader name="reader">
+                            <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+                        </resheader>
+                        <resheader name="writer">
+                            <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+                        </resheader>
+                        <data name="AccountDefaultCancel" xml:space="preserve">
+							<value>Cancel</value>
+						</data>
+                        <data name="AccountDefaultConfirm" xml:space="preserve">
+							<value>Bestätigen</value>
+						</data>
+                        <data name="AccountDefaultWarning" xml:space="preserve">
+							<value>Setting this profile as Default, will set {0} Default Profile as Not-Default.</value>
+						</data>
+                        <data name="AccountDisablingCancel" xml:space="preserve">
+							<value>Cancel</value>
+						</data>
+                        <data name="AccountDisablingConfirm" xml:space="preserve">
+							<value>Bestätigen</value>
+						</data>
+                        <data name="AccountDisablingWarning" xml:space="preserve">
+							<value>Alle Einstellungen (soweit vorhanden) für dieses Kontenprofil werden entfernt, sobald es auf inaktiv gesetzt wurde.</value>
+						</data>
+                        <data name="AccountProfile" xml:space="preserve">
+							<value>Konto Profil</value>
+						</data>
+                        <data name="AccountProfilePickerEntity" xml:space="preserve">
+							<value>Konten</value>
+						</data>
+                        <data name="AccountProfilePickerTitle" xml:space="preserve">
+							<value>Profilauswahl für Konten</value>
+						</data>
+                        <data name="AccountProfilesListViewModel" xml:space="preserve">
+							<value>Kontoprofile</value>
+						</data>
+                        <data name="AccountTypeName" xml:space="preserve">
+							<value>Konto Typ</value>
+						</data>
+                        <data name="AllowedActivities" xml:space="preserve">
+							<value>Erlaubte Aktivitäten</value>
+						</data>
+                        <data name="AllowTaxEntry" xml:space="preserve">
+							<value>Steuereingabe zulassen</value>
+						</data>
+						<data name="AllowTaxEntryByVATRate">
+							<value>Allow Tax Entry by VAT Rate</value>
+						</data>
+						<data name="Amount">
+							<value>Betrag</value>
+						</data>
+						<data name="AssociatedAccounts">
+							<value>Verknüpfte Konten</value>
+						</data>
+                        <data name="AutoGenerateXReport" xml:space="preserve">
+							<value>X Report automatisch erstellen</value>
+						</data>
+                        <data name="AutoGenerateZReport" xml:space="preserve">
+							<value>Z Report automatisch erstellen</value>
+						</data>
+                        <data name="AutomaticProcessesView" xml:space="preserve">
+							<value>Automatische Prozesse</value>
+						</data>
+                        <data name="AutoReconcile" xml:space="preserve">
+							<value>Automatisch abgleichen</value>
+						</data>
+                        <data name="Bank" xml:space="preserve">
+							<value>Bank</value>
+						</data>
+                        <data name="BankingSafe" xml:space="preserve">
+							<value>Banking Safe</value>
+						</data>
+                        <data name="Cashier" xml:space="preserve">
+							<value>Kassierer</value>
+						</data>
+                        <data name="CashierProfileModeView" xml:space="preserve">
+							<value>Profilgruppen</value>
+						</data>
+                        <data name="CashierRequiresBalancingHelp" xml:space="preserve">
+							<value>Wenn nicht aktiviert, werden Kassenbüro Konten automatisch genehmigt, so dass die Periode abgerechnet werden kann. Diese Konten werden nicht in 'Kassenperioden (offen)' angezeigt, können aber in den 'Kassenbüro Konten', 'Kassenperioden (geschlossen)' und 'Transaktionssuche' Funktionen angezeigt werden.</value>
+						</data>
+                        <data name="Constant" xml:space="preserve">
+							<value>Konstante</value>
+						</data>
+                        <data name="CTM" xml:space="preserve">
+							<value>CTM</value>
+						</data>
+                        <data name="CtmAutoDeclaration" xml:space="preserve">
+							<value>CTM automatische Ist-Erfassung</value>
+						</data>
+                        <data name="CtmAutoDeclarationHelp" xml:space="preserve">
+							<value>Wenn aktiviert, werden die Zählerstände vom CTM-Gerät ausgelesen und automatisch als Ist-Erfassung verwendet. Dies wird als erster Schritt beim Tagesende-Prozess ausgeführt.</value>
+						</data>
+                        <data name="DefaultWorkAreaTitle" xml:space="preserve">
+							<value>Kontoprofile</value>
+						</data>
+                        <data name="Description" xml:space="preserve">
+							<value>Beschreibung</value>
+						</data>
+                        <data name="FirstViewMessage" xml:space="preserve">
+							<value>Bitte wählen Sie einen Kontotyp</value>
+						</data>
+                        <data name="IncomeAndExpense" xml:space="preserve">
+							<value>Einnahmen und Ausgaben</value>
+						</data>
+                        <data name="InvalidAmount" xml:space="preserve">
+							<value>Invalid Amount</value>
+						</data>
+                        <data name="InvalidInput" xml:space="preserve">
+							<value>Ungültige Eingabe</value>
+						</data>
+                        <data name="IsActiveAccount" xml:space="preserve">
+							<value>Konto aktiv?</value>
+						</data>
+                        <data name="IsActiveAccountHelp" xml:space="preserve">
+							<value>Gibt an, ob das Kontoprofil aktiv ist oder nicht. Kassenaktivitäten können nur auf Kassenkonten ausgeführt werden, die mit aktiven Kontoprofilen verknüpft sind. Konten, die nicht mehr aktiv sind, sollten mit einem inaktiven Kontoprofil verknüpft werden. Diese Konten werden aus dem Kassenmodul (Aktivitäten und Geschäftsperioden) ausgeschlossen.</value>
+						</data>
+                        <data name="IsAmount" xml:space="preserve">
+							<value>is-amount</value>
+						</data>
+                        <data name="IsDefault" xml:space="preserve">
+							<value>Standard</value>
+						</data>
+						<data name="IsTaxAdjustable">
+							<value>Tax entry is adjustable</value>
+						</data>
+                        <data name="Kiosk" xml:space="preserve">
+							<value>Kiosk</value>
+						</data>
+                        <data name="LatestDeclaration" xml:space="preserve">
+							<value>Übertrag</value>
+						</data>
+                        <data name="Mobile" xml:space="preserve">
+							<value>Mobile</value>
+						</data>
+                        <data name="MustBeSmallerThanOrEqualToText" xml:space="preserve">
+							<value>Must be smaller than or equal to {{0}}</value>
+						</data>
+						<data name="None">
+							<value>None</value>
+						</data>
+                        <data name="Normal" xml:space="preserve">
+							<value>Bediener</value>
+						</data>
+                        <data name="OpenAmountStrategy" xml:space="preserve">
+							<value>Strategie</value>
+						</data>
+                        <data name="OpenAmountStrategyTender" xml:space="preserve">
+							<value>Ausschreibungsbetrag</value>
+						</data>
+                        <data name="OpenAmountStrategyView" xml:space="preserve">
+							<value>Offene Betragsstrategie</value>
+						</data>
+                        <data name="OpenAmountTender" xml:space="preserve">
+							<value>Zahlungsart</value>
+						</data>
+                        <data name="OverBusinessActivityThreshold" xml:space="preserve">
+							<value>Erforderliche Berechtigung bei Überschreitung des maximalen Plus von</value>
+						</data>
+                        <data name="OverThreshold" xml:space="preserve">
+							<value>Grund für einen Plusbetrag höher als</value>
+						</data>
+                        <data name="PaidInLimitations" xml:space="preserve">
+							<value>Einkommensgrenzen</value>
+						</data>
+                        <data name="PaidInManagerApprovalForHigher" xml:space="preserve">
+							<value>Manager-Genehmigung für höher bezahlt als</value>
+						</data>
+                        <data name="PaidInManagerApprovalForLower" xml:space="preserve">
+							<value>Manager-Genehmigung für bezahlt in weniger als</value>
+						</data>
+                        <data name="PaidInManagerApprovalMessageId" xml:space="preserve">
+							<value>Manager-Genehmigungsnachricht</value>
+						</data>
+                        <data name="PaidInProhibitForHigher" xml:space="preserve">
+							<value>Verbieten, höher bezahlt zu werden</value>
+						</data>
+                        <data name="PaidInProhibitForLower" xml:space="preserve">
+							<value>Verbotene Einzahlung niedriger als</value>
+						</data>
+                        <data name="PaidInRoles" xml:space="preserve">
+							<value>Rollen</value>
+						</data>
+                        <data name="PaidOutLimitations" xml:space="preserve">
+							<value>Ausgabenlimits</value>
+						</data>
+                        <data name="PaidOutManagerApprovalForHigher" xml:space="preserve">
+							<value>Manager Genehmigung für Auszahlung höher als</value>
+						</data>
+                        <data name="PaidOutManagerApprovalForLower" xml:space="preserve">
+							<value>Manager-Genehmigung für Ausbezahlung niedriger als</value>
+						</data>
+                        <data name="PaidOutManagerApprovalMessageId" xml:space="preserve">
+							<value>Manager-Genehmigungsnachricht</value>
+						</data>
+                        <data name="PaidOutProhibitForHigher" xml:space="preserve">
+							<value>Verbieten Ausbezahlt höher als</value>
+						</data>
+                        <data name="PaidOutProhibitForLower" xml:space="preserve">
+							<value>Ausbezahlt niedriger als</value>
+						</data>
+                        <data name="PaidOutRoles" xml:space="preserve">
+							<value>Rollen</value>
+						</data>
+                        <data name="Percentage" xml:space="preserve">
+							<value>Prozentsatz</value>
+						</data>
+                        <data name="PredefinedAmount" xml:space="preserve">
+							<value>Bestimmter Betrag</value>
+						</data>
+                        <data name="ProfileMode" xml:space="preserve">
+							<value>Profilgruppe</value>
+						</data>
+                        <data name="RequiresBalancing" xml:space="preserve">
+							<value>Erfordert Abrechnung</value>
+						</data>
+                        <data name="RequiresBalancingHelp" xml:space="preserve">
+							<value>'Erfordert Abrechnung' wird aktiviert für ein Kontenprofil, welches Konten zugeordnet ist, die über eine finanzielle Verantwortlichkeit verfügen und einen manuellen Abschluss erfordern. Es wird nicht aktiviert für Kontoprofile, die Konten zugeordnet sind, die über finanzielle Verantwortlichkeit verfügen, aber keinen manuellen Abschluss erfordern. Diese Konten werden von den offenen Perioden ausgeschlossen, aber in der Abrechnung als automatisch abgerechnet angezeigt.</value>
+						</data>
+						<data name="RestrictedTendersPerActivity">
+							<value>Eingeschränkte Zahlungsarten nach Aktivität</value>
+						</data>
+						<data name="RestrictPaidInTo">
+							<value>Einzahlungen eingeschränkt auf</value>
+						</data>
+						<data name="RestrictPaidOutTo">
+							<value>Auszahlungen einschränkt auf</value>
+						</data>
+                        <data name="Safe" xml:space="preserve">
+							<value>Safe</value>
+						</data>
+                        <data name="SCO" xml:space="preserve">
+							<value>SCO</value>
+						</data>
+                        <data name="SettlementThreshold" xml:space="preserve">
+							<value>Limits für Begründung beim Abschluss</value>
+						</data>
+                        <data name="ShortBusinessActivityThreshold" xml:space="preserve">
+							<value>Erforderliche Berechtigung bei Überschreitung des maximalen Minus von</value>
+						</data>
+                        <data name="ShortThreshold" xml:space="preserve">
+							<value>Grund für einen Minusbetrag höher als</value>
+						</data>
+                        <data name="Source" xml:space="preserve">
+							<value>Quelle</value>
+						</data>
+                        <data name="SourceActivities" xml:space="preserve">
+							<value>Quellenaktivitäten</value>
+						</data>
+                        <data name="Target" xml:space="preserve">
+							<value>Ziel</value>
+						</data>
+                        <data name="TargetActivities" xml:space="preserve">
+							<value>Zielaktivitäten</value>
+						</data>
+                        <data name="TaxAssociation" xml:space="preserve">
+							<value>Behandlung von Steuern</value>
+						</data>
+						<data name="TaxEntryStatus">
+							<value>Tax Entry Status</value>
+						</data>
+						<data name="Tenders">
+							<value>Zahlungsarten</value>
+						</data>
+                        <data name="Till" xml:space="preserve">
+							<value>Kasse</value>
+						</data>
+                        <data name="Total" xml:space="preserve">
+							<value>Gesamt</value>
+						</data>
+                        <data name="ValueMustBeAPositiveNumber" xml:space="preserve">
+							<value>Value must be a positive number</value>
+						</data>
+						<data name="Balancing" xml:space="preserve">
+							<value>Abrechnung</value>
+						</data>
+						<data name="HideExpected" xml:space="preserve">
+							<value>Soll ausblenden</value>
+						</data>
+						<data name="HideExpectedHelp" xml:space="preserve">
+							<value>Soll wird ausgeblendet, bis abgerechnet wurde.</value>
+						</data>
+						<data name="LastExpected" xml:space="preserve">
+							<value>Soll letzte Periode</value>
+						</data>
+						<data name="DeclarationRequiredHelp" xml:space="preserve">
+							<value>Wenn aktiviert, muss für Konten in diesem Profil mindestens eine Ist-Erfassung pro Periode erfolgen, bevor sie genehmigt werden können.</value>
+						</data>
+						<data name="DeclarationRequired" xml:space="preserve">
+							<value>Ist-Erfassung erforderlich</value>
+						</data>
+						<data name="TaxEntryDetails" xml:space="preserve">
+							<value>Methode</value>
+						</data>
+						<data name="AllowTaxEntryCorrection" xml:space="preserve">
+							<value>Korrektur erlaubt</value>
+						</data>
+						<data name="ByTaxableAmount" xml:space="preserve">
+							<value>Steuerpflichtiger Betrag pro Steuersatz</value>
+						</data>
+						<data name="ByTaxAmount" xml:space="preserve">
+							<value>Steuerbetrag pro Steuersatz</value>
+						</data>
+						<data name="ByTotalTaxAmount" xml:space="preserve">
+							<value>Gesamter Steuerbetrag</value>
+						</data>
+						<data name="AssociateMerchandiseHierarchyForTax" xml:space="preserve">
+							<value>Mit Filialhierarchie verknüpfen</value>
+						</data>
+						<data name="IsMerchandiseHierarchyForTaxRequired" xml:space="preserve">
+							<value>Filialhierarchie erforderlich</value>
+						</data>
+						<data name="SetCorrectionRangeBy" xml:space="preserve">
+							<value>Korrektur begrenzen durch</value>
+						</data>
+						<data name="MaxTaxEntryPercent" xml:space="preserve">
+							<value>Maximaler Prozentsatz</value>
+						</data>
+						<data name="MaxTaxEntryPercentTooltips" xml:space="preserve">
+							<value>Maximal zulässige Korrektur Prozent.</value>
+						</data>
+						<data name="MaxTaxEntryValue" xml:space="preserve">
+							<value>Maximaler Betrag</value>
+						</data>
+						<data name="MaxTaxEntryValueTooltips" xml:space="preserve">
+							<value>Maximal zulässige Korrektur Betrag.</value>
+						</data>
+						<data name="MaxTaxEntryValueValidation" xml:space="preserve">
+							<value>Ungültiger Wert: Ganzzahl &gt;= 0 erforderlich</value>
+						</data>
+						<data name="MaxTaxEntryPercentValidation" xml:space="preserve">
+							<value>Ungültiger Wert: Wert zwischen 0 und 100 erforderlich</value>
+						</data>
+						<data name="MonetaryValue" xml:space="preserve">
+							<value>Betrag</value>
+						</data>
+						<data name="Percent" xml:space="preserve">
+							<value>Prozent</value>
+						</data>
+						<data name="InvalidAmount" xml:space="preserve">
+							<value>Ungültiger Betrag</value>
+						</data>
+						<data name="PreviousToLatestDeclaration" xml:space="preserve">
+							<value>Übertrag – 2 Schubladen</value>
+						</data>
+						<data name="LatestDeclarationTooltip" xml:space="preserve">
+							<value>Für die Strategie 'Übertrag' wird der offene Betrag für die aktuelle Periode aus dem gezählten Betrag der letzten Periode entnommen.
+Wenn keine Zählung vorgenommen wurde, wird der offene Betrag für die aktuelle Periode aus dem erwarteten Betrag der letzten Periode entnommen.</value>
+						</data>
+						<data name="PreviousToLatestDeclarationTooltip" xml:space="preserve">
+							<value>Für die Strategie 'Übertrag – 2 Schubladen' wird ein Schubladen-Paar verwendet.
+Für diese Strategie arbeitet ein Geschäft mit einem Satz aus 2 Schubladen:
+- Aktuelle Periode (1): Schublade #1 ist aktiv, Schublade #2 ist inaktiv und wird gezählt.
+- Nächste Periode (2): Schublade #2 ist aktiv, Schublade #1 ist inaktiv und wird gezählt.
+- Nächste Periode (3): Schublade #1 ist aktiv, Schublade #2 ist inaktiv und wird gezählt.
+- Nächste Periode (4): Schublade #2 ist aktiv, Schublade #1 ist inaktiv und wird gezählt.
+- usw.
+Der offene Betrag für Schublade #1 ist der zuvor gezählte Betrag aus Schublade #1 (wenn keine Zählung für Schublade #1 erfolgt ist, wird der erwartete Betrag verwendet).
+Der offene Betrag für Schublade #2 ist der zuvor gezählte Betrag aus Schublade #2 (wenn für Schublade #2 keine Zählung vorgenommen wurde, wird der erwartete Betrag verwendet)."</value>
+						</data>
+                    </root>
+                </Data>
+            </ResourcePackage>
+        </UpdateResourceSet>
+    </LocalizedResources>
+</LocalizedResourceMaintenanceRequest>

@@ -1,12 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace TranslationTool.Data;
-
-public interface IPOSClientLocalizedResourceProvider
-{
-  List<string>? GetAllTrsnslations();
-}
 
 public class POSClientLocalizedResourceProvider : IPOSClientLocalizedResourceProvider
 {

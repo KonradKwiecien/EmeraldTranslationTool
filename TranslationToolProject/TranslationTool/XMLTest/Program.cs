@@ -1,45 +1,59 @@
-﻿
+﻿using System.Xml.Linq;
+using System.Xml.Serialization;
+using TranslationTool.Model;
 
-using System;
-using System.Reflection;
-using System.Xml;
-using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
+public class Program
+{
+  const string XML_FILE = @".\..\..\..\..\..\TestFiles\Core\POSClient.en-US.POSClient.en-US.xml";
 
-const string XML_FILE = @".\..\..\..\..\..\TestFiles\OfficeCCM_LocalizedResourceMaintenance.LocalizedResourceMaintenance";
+  private static void Main(string[] args)
+  {
+    //ReadXMLFile();
+    DeserializeFromXml();
 
-//<? xml version = "1.0" ?>
-//<Root Att1 = "AttributeContent">
-//  <Child>
-//    Some text
-//    <GrandChild>
-//      element content
-//    </GrandChild>
-//  </Child>
-//</Root>
-XElement xmlTree = new XElement("Root",
-    new XAttribute("Att1", "AttributeContent"),
-    new XElement("Child",
-        new XText("Some text"),
-        new XElement("GrandChild", "element content")
-    )
-);
-IEnumerable<XElement> de0 =
-    from el in xmlTree.Descendants("Child")
-    select el;
-foreach (XElement el in de0)
-  Console.WriteLine(el.Name);
+    Console.ReadKey();
+  }
 
-//XDocument doc = XDocument.Load(XML_FILE);
-var xDoc = XDocument.Load(XML_FILE);
-IEnumerable<XElement> de =
-    from el in xDoc.Descendants("data")
-    select el;
+  private static void DeserializeFromXml()
+  {
+    XMLPosClientModel? model;
+    string xmlString = File.ReadAllText(XML_FILE);
 
-foreach (XElement el in de)
-  Console.WriteLine(el.Name);
+    // Create XML Serializer
+    XmlSerializer serializer = new(typeof(XMLPosClientModel));
+    // Create a StringReader with the value from the file
+    using (StringReader sr = new(xmlString))
+    {
+      // Convert the string to a product
+      model = (XMLPosClientModel?)serializer.Deserialize(sr);
+    }
 
-Console.ReadKey();
+    // Display Product
+    Console.WriteLine(model);
+  }
+
+  private static void ReadXMLFile()
+  {
+    var xDoc = XDocument.Load(XML_FILE);
+    IEnumerable<XElement>? dataTags = xDoc.Root?.Elements("data");
 
 
+    List<POSClientResourceModel> pOSClientResources = new();
 
+    if (dataTags != null)
+    {
+      foreach (XElement data in dataTags)
+      {// http://www.w3.org/XML/1998/namespace}space}	System.Xml.Linq.XName}space}	System.Xml.Linq.XName
+
+        string? attrName = data.Attribute("name")?.Value;
+        string? attrSpace = data.Attribute(XNamespace.Xml + "space")?.Value;
+        string? value = data.Element("value")?.Value;
+        if ((attrName is not null) && (value is not null))
+        {
+          var pOSClientResourceModel = new POSClientResourceModel { Key = attrName, Space = attrSpace, Translation = value };
+          Console.WriteLine($"POSClientResource: {pOSClientResourceModel}");
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LocalizedResourceMaintenanceRequest FixVersion="0" MajorVersion="10" MinorVersion="3" xmlns="http://retalix.com/R10/services">
 	<RequestHeader>
 		<MessageId>1</MessageId>

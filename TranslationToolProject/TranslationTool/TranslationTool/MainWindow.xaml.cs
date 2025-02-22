@@ -17,7 +17,7 @@ namespace TranslationTool
       root.Loaded += Root_Loaded; ;
     }
 
-    private async void Root_Loaded(object sender, RoutedEventArgs e)
+    private void Root_Loaded(object sender, RoutedEventArgs e)
     {
       ViewModel.LoadTranslations();
     }
