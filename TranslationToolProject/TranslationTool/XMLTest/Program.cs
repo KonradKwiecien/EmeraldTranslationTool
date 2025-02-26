@@ -16,16 +16,16 @@ public class Program
 
   private static void DeserializeFromXml()
   {
-    XMLPosClientModel? model;
+    XmlPosClientData? model;
     string xmlString = File.ReadAllText(XML_FILE);
 
     // Create XML Serializer
-    XmlSerializer serializer = new(typeof(XMLPosClientModel));
+    XmlSerializer serializer = new(typeof(XmlPosClientData));
     // Create a StringReader with the value from the file
     using (StringReader sr = new(xmlString))
     {
       // Convert the string to a product
-      model = (XMLPosClientModel?)serializer.Deserialize(sr);
+      model = (XmlPosClientData?)serializer.Deserialize(sr);
     }
 
     // Display Product

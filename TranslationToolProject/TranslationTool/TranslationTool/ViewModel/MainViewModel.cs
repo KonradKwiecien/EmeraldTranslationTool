@@ -1,10 +1,8 @@
-﻿using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml.Documents;
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using TranslationTool.Data;
+using TranslationTool.Model;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using WTranslationTool.Command;
@@ -13,49 +11,41 @@ namespace TranslationTool.ViewModel
 {
   public class MainViewModel : ViewModelBase
   {
-    private readonly IPOSClientLocalizedResourceProvider _pOSClientLocalizedResourceProvider;
+    private readonly IPOSClientResxResourceProvider _posClientResxResourceProvider;
 
-    private string? _JSONFileContext;
-    private bool _CBJsonFileVisibility;
+    private bool _comboBoxResxFileVisibility;
 
-    public bool CBJsonFileVisibility
+    public PosClientTranslation? PosClientTranslation { get; private set; }
+
+    public IPOSClientResxResourceProvider PosClientResxResourceProvider { get => _posClientResxResourceProvider; }
+
+    public bool ComboBoxResxFileVisibility
     {
-      get => _CBJsonFileVisibility;
+      get => _comboBoxResxFileVisibility;
       set
       {
-        _CBJsonFileVisibility = value;
+        _comboBoxResxFileVisibility = value;
         RaisePropertyChanged();
       }
     }
 
-    public string? JSONFileContext
-    {
-      get => _JSONFileContext;
-      set
-      {
-        _JSONFileContext = value;
-        CBJsonFileVisibility = true;
-        RaisePropertyChanged();
-      }
-    }
-
-    public ICommand OpenJSONFileCommand { get; }
+    public ICommand OpenResxFileCommand { get; }
 
     public string TestLabel { get; set; } = "TestLabel";
 
-    public MainViewModel(IPOSClientLocalizedResourceProvider pOSClientLocalizedResourceProvider)
+    public MainViewModel(IPOSClientResxResourceProvider pOSClientResxResourceProvider)
     {
-      _pOSClientLocalizedResourceProvider = pOSClientLocalizedResourceProvider;
+      _posClientResxResourceProvider = pOSClientResxResourceProvider;
 
-      OpenJSONFileCommand = new DelegateCommand(OpenJSONFileAsync);
+      OpenResxFileCommand = new DelegateCommand(OpenResxFileAsync);
     }
 
-    public void LoadTranslations()
+    public void DeserializeFromXml(string xmlFile)
     {
-      List<string>? translations = _pOSClientLocalizedResourceProvider.GetAllTrsnslations();
+      PosClientTranslation = _posClientResxResourceProvider.LoadRexsFile(xmlFile);
     }
 
-    private async void OpenJSONFileAsync(object? parameter)
+    private async void OpenResxFileAsync(object? parameter)
     {
       //JSONFileContext = "File Loaded";
       // Create a file picker
@@ -69,13 +59,27 @@ namespace TranslationTool.ViewModel
 
       // Set options for your file picker
       openPicker.ViewMode = PickerViewMode.List;
-      openPicker.FileTypeFilter.Add(".json");
+      openPicker.FileTypeFilter.Add(".resx");
 
       // Open the picker for the user to pick a file
       var selectedFile = await openPicker.PickSingleFileAsync();
       if (selectedFile != null)
       {
         var lines = await FileIO.ReadLinesAsync(selectedFile);
+
+        //ResxFileContext = "File opened";
+        Run r = new Run();
+        r.Text = "Run Text";
+        //foreach (var line in lines)
+        //{
+        //  //JSONFileContext = $"File {selectedFile.Name} opened".ToString();
+        //  //resxFileTextBlock.De
+        //  Paragraph pa = new Paragraph();
+        //  Run run = new Run();
+        //  run.Text = "wertzuiop";
+        //  pa.Inlines.Add(run);
+
+        //}
       }
     }
   }

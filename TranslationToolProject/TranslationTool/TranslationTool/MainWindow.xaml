@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Window
+<Window 
     x:Class="TranslationTool.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -11,19 +11,19 @@
     Title="TranslationTool">
 
   <Grid x:Name="root" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
+
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
-    
+
     <!-- Main menu -->
     <MenuBar>
       <MenuBarItem Title="File">
         <MenuFlyoutSubItem Text="Open" Icon="OpenFile">
-          <MenuFlyoutItem Text="JSON file" Command="{x:Bind ViewModel.OpenJSONFileCommand}">
+          <MenuFlyoutItem Text="JSON file" Command="{x:Bind ViewModel.OpenResxFileCommand}">
             <MenuFlyoutItem.KeyboardAccelerators>
               <KeyboardAccelerator Modifiers="Control,Shift" Key="J"/>
             </MenuFlyoutItem.KeyboardAccelerators>
@@ -57,12 +57,12 @@
       <StackPanel x:Name="commandBarPanel" Orientation="Horizontal">
         <!-- Common commands -->
         <StackPanel x:Name="commonCommandBarPanel" Orientation="Horizontal">
-          <AppBarButton Icon="OpenFile" Command="{x:Bind ViewModel.OpenJSONFileCommand}"/>
+          <AppBarButton Icon="OpenFile" Command="{x:Bind ViewModel.OpenResxFileCommand}"/>
           <AppBarButton Icon="Save"/>
         </StackPanel>
         <!-- Commands for JSON file -->
         <StackPanel Grid.Column="1" x:Name="commandBarJsonFile" Orientation="Horizontal"
-                    Visibility="{x:Bind ViewModel.CBJsonFileVisibility, Mode=OneWay}">
+                    Visibility="{x:Bind ViewModel.ComboBoxResxFileVisibility, Mode=OneWay}">
           <AppBarButton Icon="FontDecrease"/>
           <AppBarButton Icon="FontIncrease"/>
           <AppBarButton Icon="ShowResults"/>
@@ -73,10 +73,8 @@
                     HorizontalAlignment="Right" Toggled="TheneSwitch_Toggled"/>
     </Grid>
 
-    <TextBlock Grid.Row="2" x:Name="JSONTextBlock" Text="{x:Bind ViewModel.JSONFileContext, Mode=TwoWay}"
-               TextWrapping="Wrap" IsTextSelectionEnabled="True">
-      No file loaded...
-    </TextBlock>
+    <TextBlock Grid.Row="2" x:Name="ResxFileTextBlock" Margin="10" 
+               TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
     <!-- Statusbar -->
     <Border Grid.Row="3" Background="{StaticResource StatusbarBackgroundBrush}">

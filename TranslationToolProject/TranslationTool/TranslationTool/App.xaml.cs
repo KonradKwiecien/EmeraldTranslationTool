@@ -25,7 +25,7 @@ namespace TranslationTool
     {
       services.AddTransient<MainWindow>();
       services.AddTransient<MainViewModel>();
-      services.AddTransient<IPOSClientLocalizedResourceProvider, POSClientLocalizedResourceProvider>();
+      services.AddTransient<IPOSClientResxResourceProvider, POSClientResxResourceProvider>();
     }
 
     protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
