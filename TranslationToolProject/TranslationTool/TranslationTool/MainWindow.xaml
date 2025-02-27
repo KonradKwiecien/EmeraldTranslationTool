@@ -73,8 +73,17 @@
                     HorizontalAlignment="Right" Toggled="TheneSwitch_Toggled"/>
     </Grid>
 
-    <TextBlock Grid.Row="2" x:Name="ResxFileTextBlock" Margin="10" 
+    <TextBlock Grid.Row="2" x:Name="ResxFileTextBlock" Margin="10" FontFamily="Courier New"
                TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+    <!--<TextBlock  x:Name="TestTextBlock" TextWrapping="Wrap">
+      Use the <Run Foreground="Blue" FontSize="30">LineStackingStrategy</Run> property to determine how a line box is
+    created for each line. A value of <Run FontSize="20">MaxHeight</Run> specifies that the stack
+    height is the smallest value that contains all the inline elements on that line when those
+    elements are properly aligned. A value of <Run FontSize="20">BlockLineHeight</Run> specifies
+    that the stack height is determined by the block element LineHeight property value. A value of 
+    <Run FontSize="20">BaselineToBaseline</Run> specifies that the stack height is determined by adding 
+    LineHeight to the baseline of the previous line.
+    </TextBlock>-->
 
     <!-- Statusbar -->
     <Border Grid.Row="3" Background="{StaticResource StatusbarBackgroundBrush}">

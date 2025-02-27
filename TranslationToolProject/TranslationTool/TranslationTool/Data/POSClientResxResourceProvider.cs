@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Xml;
 using System.Xml.Serialization;
 using TranslationTool.Model;
 
 namespace TranslationTool.Data;
 public class POSClientResxResourceProvider : IPOSClientResxResourceProvider
 {
-  public PosClientTranslation? LoadRexsFile(string fullXmlFile)
+  public PosClientTranslationModel? LoadRexsFile(string fullXmlFile)
   {
-    PosClientTranslation? clientTranslation = null;
+    PosClientTranslationModel? clientTranslation = null;
 
     if ((fullXmlFile is not null) || File.Exists(fullXmlFile))
     {
@@ -42,28 +40,5 @@ public class POSClientResxResourceProvider : IPOSClientResxResourceProvider
     }
 
     return clientTranslation;
-  }
-
-  public string FormatLine(Resheader resheader)
-  {
-    // Create empty namespaces with empty value
-    XmlSerializerNamespaces emptyNamespaces = new XmlSerializerNamespaces();
-    emptyNamespaces.Add("", "");
-
-    XmlWriterSettings settings = new()
-    {
-      Indent = true,
-      OmitXmlDeclaration = true,      
-    };
-
-    using (StringWriter stream = new StringWriter())
-    using (var writer = XmlWriter.Create(stream, settings))
-    {
-      XmlSerializer serializer = new(typeof(XmlResheader));
-      XmlResheader xmlRes = new() { Key = resheader.Key, Value = resheader.Value };
-      serializer.Serialize(writer, xmlRes, emptyNamespaces);
-
-      return stream.ToString();
-    }
   }
 }

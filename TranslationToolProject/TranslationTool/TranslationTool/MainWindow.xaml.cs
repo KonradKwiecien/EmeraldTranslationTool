@@ -1,53 +1,59 @@
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Documents;
 using System;
 using System.Collections.Generic;
-using TranslationTool.Data;
 using TranslationTool.Model;
+using TranslationTool.Renderer;
 using TranslationTool.ViewModel;
-using Windows.Storage.Pickers;
 
-namespace TranslationTool
+namespace TranslationTool;
+
+public sealed partial class MainWindow : Window
 {
-  public sealed partial class MainWindow : Window
+  private readonly ITranslationFormatRenderer _translationFormatRenderer;
+
+  public MainViewModel ViewModel { get; }
+
+  public MainWindow(MainViewModel viewModel, ITranslationFormatRenderer translationFormatRenderer)
   {
-    public MainViewModel ViewModel { get; }
+    this.InitializeComponent();
 
-    public MainWindow(MainViewModel viewModel)
+    ViewModel = viewModel;
+    _translationFormatRenderer = translationFormatRenderer;
+
+    root.Loaded += Root_Loaded; ;
+  }
+
+  private void Root_Loaded(object sender, RoutedEventArgs e)
+  {
+    ViewModel.DeserializeFromXml($@"{AppContext.BaseDirectory}\..\..\..\..\..\..\..\..\TestFiles\Core\POSClient.en-US.POSClient.en-US.xml");
+
+    if (ViewModel.PosClientTranslation is not null)
     {
-      this.InitializeComponent();
-      ViewModel = viewModel;
-      root.Loaded += Root_Loaded; ;
+      _translationFormatRenderer.FormatLines(ResxFileTextBlock, ViewModel.PosClientTranslation);
+      //bool addNewLine = false;
+      //foreach (Resheader? resheader in ViewModel.PosClientTranslation.Resheaders)
+      //{
+      //  if (addNewLine)
+      //  {
+      //    ResxFileTextBlock.Inlines.Add(new LineBreak());
+      //  }
+      //  addNewLine = true;
+      //  //Run r = new() { Text = resheader.Value };
+
+      //  //List<Run> runs = ViewModel.PosClientResxResourceProvider.FormatLines(resheader);
+      //  //foreach (var run in runs)
+      //  //{
+      //  //  ResxFileTextBlock.Inlines.Add(run);
+      //  //}
+      //}
     }
+  }
 
-    private void Root_Loaded(object sender, RoutedEventArgs e)
-    {
-      ViewModel.DeserializeFromXml($@"{AppContext.BaseDirectory}\..\..\..\..\..\..\..\..\TestFiles\Core\POSClient.en-US.POSClient.en-US.xml");
-
-      if (ViewModel.PosClientTranslation is not null && ViewModel.PosClientTranslation.Resheaders is not null)
-      {
-        bool addNewLine = false;
-        foreach (Resheader? resheader in ViewModel.PosClientTranslation.Resheaders)
-        {
-          if (addNewLine)
-          {
-            ResxFileTextBlock.Inlines.Add(new LineBreak());
-          }
-          addNewLine = true;
-          //Run r = new() { Text = resheader.Value };
-
-          string formattedLine = ViewModel.PosClientResxResourceProvider.FormatLine(resheader);          
-          ResxFileTextBlock.Inlines.Add(new Run() { Text = formattedLine });
-        }
-      }
-    }
-
-    private void TheneSwitch_Toggled(object sender, RoutedEventArgs e)
-    {
-      root.RequestedTheme = root.RequestedTheme == ElementTheme.Light
-       ? ElementTheme.Dark : ElementTheme.Light;
-    }
+  private void TheneSwitch_Toggled(object sender, RoutedEventArgs e)
+  {
+    root.RequestedTheme = root.RequestedTheme == ElementTheme.Light
+     ? ElementTheme.Dark : ElementTheme.Light;
   }
 }
 

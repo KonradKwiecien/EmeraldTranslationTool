@@ -15,7 +15,7 @@ namespace TranslationTool.ViewModel
 
     private bool _comboBoxResxFileVisibility;
 
-    public PosClientTranslation? PosClientTranslation { get; private set; }
+    public PosClientTranslationModel? PosClientTranslation { get; private set; }
 
     public IPOSClientResxResourceProvider PosClientResxResourceProvider { get => _posClientResxResourceProvider; }
 
