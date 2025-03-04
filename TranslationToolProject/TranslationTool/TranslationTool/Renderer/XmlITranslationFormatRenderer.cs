@@ -7,6 +7,13 @@ using System.Xml.Serialization;
 using System.Xml;
 using TranslationTool.Model;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Text;
+using Microsoft.UI;
+using Microsoft.Windows.Storage;
+using Microsoft.UI.Xaml;
+using Windows.UI;
+using System.Linq;
 
 namespace TranslationTool.Renderer;
 public class XmlITranslationFormatRenderer : ITranslationFormatRenderer
@@ -17,57 +24,102 @@ public class XmlITranslationFormatRenderer : ITranslationFormatRenderer
     XmlSerializerNamespaces emptyNamespaces = new XmlSerializerNamespaces();
     emptyNamespaces.Add("", "");
 
-    XmlWriterSettings settings = new()
+    XmlWriterSettings writterSettings = new()
     {
       Indent = true,
       OmitXmlDeclaration = true,
     };
 
-    XmlPosClientData xmlData = new XmlPosClientData();
+    XmlPosClientData xmlData = new XmlPosClientData(posClientTranslationModel);
 
-    foreach(Resheader resheader in posClientTranslationModel.)
+    HashSet<string> attributeNameList = new();
+    HashSet<string> elementNameList = new();
+
+    List<Type> elementsToRenderer = new List<Type> { typeof(XmlResheader), typeof(XmlMetadata), typeof(XmlTranslation) };
+    foreach (Type xmlType in elementsToRenderer)
     {
-
-    }
-
-    XmlResheader xmlRes = new() { Key = resheader.Key, Value = resheader.Value };
-
-    FieldInfo[] fields = xmlRes.GetType().GetFields();
-    List<string> attributeNameList = new();
-    List<string> elementNameList = new();
-    foreach (var field in fields)
-    {
-      Attribute[] propXmlAttributeList = Attribute.GetCustomAttributes(field, typeof(XmlAttributeAttribute), false);
-      foreach (XmlAttributeAttribute propXmlAttribute in propXmlAttributeList)
+      PropertyInfo[]? propertyInfos = xmlType.GetProperties();
+      if ((propertyInfos is not null) && propertyInfos.Length > 0)
       {
-        // XML attribute found 
-        attributeNameList.Add($@"""{field.GetValue(xmlRes)}""");
-      }
+        foreach (var property in propertyInfos)
+        {
+          Attribute[] propXmlAttributeList = Attribute.GetCustomAttributes(property, typeof(XmlAttributeAttribute), false);
+          foreach (XmlAttributeAttribute propXmlAttribute in propXmlAttributeList)
+          {
+            // XML attribute found 
+            attributeNameList.Add(propXmlAttribute.AttributeName);
+          }
 
-      Attribute[] propXmlElementList = Attribute.GetCustomAttributes(field, typeof(XmlElementAttribute), false);
-      foreach (XmlElementAttribute propXmlElement in propXmlElementList)
-      {
-        // XML element found
-        elementNameList.Add($"{field.GetValue(xmlRes)}");
+          Attribute[] propXmlElementList = Attribute.GetCustomAttributes(property, typeof(XmlElementAttribute), false);
+          foreach (XmlElementAttribute propXmlElement in propXmlElementList)
+          {
+            // XML element found
+            elementNameList.Add(propXmlElement.ElementName);
+          }
+        }
       }
     }
 
     using (StringWriter stream = new StringWriter())
-    using (var writer = XmlWriter.Create(stream, settings))
+    using (var writer = XmlWriter.Create(stream, writterSettings))
     {
-      XmlSerializer serializer = new(typeof(XmlResheader)); ;
-      serializer.Serialize(writer, xmlRes, emptyNamespaces);
+      XmlSerializer serializer = new(typeof(XmlPosClientData));
+      serializer.Serialize(writer, xmlData, emptyNamespaces);
+
+      Color elementColor = textBlock.ActualTheme == ElementTheme.Light ? Colors.DeepSkyBlue : Colors.LightSkyBlue;
+      Color attributeNameColor = textBlock.ActualTheme == ElementTheme.Light ? Colors.Red : Colors.Red;
+      Color attributeValueColor = textBlock.ActualTheme == ElementTheme.Light ? Colors.Yellow : Colors.DarkGreen;
 
       string[] lines = stream.ToString().Split(Environment.NewLine);
       List<Run> formattedLines = new();
+      bool xmlElementOpened = false;
       foreach (string line in lines)
       {
+        foreach (string elementName in elementNameList)
+        {
+          string startXmlElementName = "<" + elementName + ">";
+          string endXmlElementName = "</" + elementName + ">";
+          string startXmlElement = string.Empty;
+          string endXmlElement = string.Empty;
+          string? lineToFormat = null;
+          if (line.Trim().StartsWith(startXmlElementName))
+          {
+            xmlElementOpened = true;
+            lineToFormat = line;
+            startXmlElement = lineToFormat[..(lineToFormat.IndexOf(startXmlElementName) + startXmlElementName.Length)];
+            lineToFormat = lineToFormat[startXmlElement.Length..];
+          }
+          if (line.Trim().EndsWith(endXmlElementName))
+          {
+            xmlElementOpened = false;
+            endXmlElement = (lineToFormat ??= line)[^endXmlElementName.Length..];
+            lineToFormat = lineToFormat[..^endXmlElementName.Length];
+          }
 
+          if ((lineToFormat is not null) || xmlElementOpened)
+          {
+            textBlock.Inlines.Add(new Run() { Text = startXmlElement });
+            textBlock.Inlines.Add(new Run() { Text = lineToFormat ?? line, Foreground = new SolidColorBrush(elementColor)/*, FontWeight = FontWeights.Bold */});
+            textBlock.Inlines.Add(new Run() { Text = endXmlElement });
+          } else
+          {
+            // No formatting
+            textBlock.Inlines.Add(new Run() { Text = line });
+          }
+
+          textBlock.Inlines.Add(new LineBreak());
+          if ((startXmlElement is not null) || (endXmlElement is not null))
+          {
+            // There can only be one XML element per line.
+            break;
+          }
+        }
+
+        //List<string>? parts;
+        //string[] separatingStrings = attributeNameList.ToArray<string>();
+        //  line.Split(separatingStrings, StringSplitOptions.None);
+       
       }
-      // new string[] { Environment.NewLine },
-      //StringSplitOptions.None);
-
-      return formattedLines;
     }
   }
 }

@@ -12,11 +12,9 @@ namespace TranslationTool.ViewModel
   public class MainViewModel : ViewModelBase
   {
     private readonly IPOSClientResxResourceProvider _posClientResxResourceProvider;
-
     private bool _comboBoxResxFileVisibility;
 
     public PosClientTranslationModel? PosClientTranslation { get; private set; }
-
     public IPOSClientResxResourceProvider PosClientResxResourceProvider { get => _posClientResxResourceProvider; }
 
     public bool ComboBoxResxFileVisibility

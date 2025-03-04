@@ -22,7 +22,9 @@
     <value>en-US</value>
   </metadata>
   <data name="TestId.Text" xml:space="preserve">
-    <value>TestText</value>
+    <value>Test1
+  Test2
+3Text</value>
   </data>
   <data name="PosWindowTitle.Title" xml:space="preserve">
     <value>R10PosClient</value>

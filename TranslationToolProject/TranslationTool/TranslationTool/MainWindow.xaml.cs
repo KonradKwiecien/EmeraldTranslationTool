@@ -1,8 +1,5 @@
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Documents;
 using System;
-using System.Collections.Generic;
-using TranslationTool.Model;
 using TranslationTool.Renderer;
 using TranslationTool.ViewModel;
 
@@ -30,23 +27,7 @@ public sealed partial class MainWindow : Window
 
     if (ViewModel.PosClientTranslation is not null)
     {
-      _translationFormatRenderer.FormatLines(ResxFileTextBlock, ViewModel.PosClientTranslation);
-      //bool addNewLine = false;
-      //foreach (Resheader? resheader in ViewModel.PosClientTranslation.Resheaders)
-      //{
-      //  if (addNewLine)
-      //  {
-      //    ResxFileTextBlock.Inlines.Add(new LineBreak());
-      //  }
-      //  addNewLine = true;
-      //  //Run r = new() { Text = resheader.Value };
-
-      //  //List<Run> runs = ViewModel.PosClientResxResourceProvider.FormatLines(resheader);
-      //  //foreach (var run in runs)
-      //  //{
-      //  //  ResxFileTextBlock.Inlines.Add(run);
-      //  //}
-      //}
+      _translationFormatRenderer.FormatTranslations(ResxFileTextBlock, ViewModel.PosClientTranslation);
     }
   }
 
@@ -54,6 +35,12 @@ public sealed partial class MainWindow : Window
   {
     root.RequestedTheme = root.RequestedTheme == ElementTheme.Light
      ? ElementTheme.Dark : ElementTheme.Light;
+
+    if (ViewModel.PosClientTranslation is not null)
+    {
+      ResxFileTextBlock.Text = string.Empty;
+      _translationFormatRenderer.FormatTranslations(ResxFileTextBlock, ViewModel.PosClientTranslation);
+    }
   }
 }
 

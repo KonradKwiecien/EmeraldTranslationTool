@@ -11,8 +11,8 @@ public interface IPosClientTranslationModel
 
 public interface IResheader
 {
-  string Key { get; }
-  string Value { get; }
+  string? Key { get; }
+  string? Value { get; }
 }
 public interface IMetadata
 {

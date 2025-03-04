@@ -65,20 +65,20 @@ public class PosClientTranslationModel : IPosClientTranslationModel
 
 public class Resheader : IResheader
 {
-  required public string Value { get; set; }
-  required public string Key { get; set; }
+  required public string? Value { get; set; }
+  required public string? Key { get; set; }
 }
 
 public class Metadata : IMetadata
 {
   public string? Space { set; get; }
-  required public string Value { set; get; }
-  required public string Key { set; get; }
+  required public string? Value { set; get; }
+  required public string? Key { set; get; }
 }
 
 public class Translation : ITranslation
 {
-  public string? Space { set; get; }
-  required public string Text { set; get; }
-  required public string Key { set; get; }
+  public string? Space { set; get; }  
+  required public string? Text { set; get; }
+  required public string? Key { set; get; }
 }
