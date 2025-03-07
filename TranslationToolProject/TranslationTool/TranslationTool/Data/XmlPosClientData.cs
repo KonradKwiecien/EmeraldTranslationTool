@@ -22,11 +22,11 @@ public partial class XmlPosClientData
   {
   }
 
-  public XmlPosClientData(IPosClientTranslationModel posClientTranslationModel)
+  public XmlPosClientData(PosClientModel posClientTranslationModel)
   {
     if (posClientTranslationModel.Resheaders is not null)
     {
-      foreach (IResheader resheader in posClientTranslationModel.Resheaders)
+      foreach (Resheader resheader in posClientTranslationModel.Resheaders)
       {
         (Resheaders ??= new()).Add(new XmlResheader()
         {
@@ -37,7 +37,7 @@ public partial class XmlPosClientData
 
     if (posClientTranslationModel.Metadata is not null)
     {
-      foreach (IMetadata metadata in posClientTranslationModel.Metadata)
+      foreach (Metadata metadata in posClientTranslationModel.Metadata)
       {
         (Metadata ??= new()).Add(new XmlMetadata()
         {

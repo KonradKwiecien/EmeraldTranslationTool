@@ -1,18 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using TranslationTool.Model;
 
 namespace TranslationTool.Data;
 public class POSClientResxResourceProvider : IPOSClientResxResourceProvider
 {
-  public PosClientTranslationModel? LoadRexsFile(string fullXmlFile)
+  public IPosClientTranslationModel? LoadXmlFromRexsFile(string fullResxFile)
   {
-    PosClientTranslationModel? posClientTranslationModel = null;
-
-    if ((fullXmlFile is not null) && File.Exists(fullXmlFile))
+    IPosClientTranslationModel? posClientTranslationModel = null;
+    if (File.Exists(fullResxFile))
     {
-      string xmlString = File.ReadAllText(fullXmlFile);
+      posClientTranslationModel = new PosClientTranslationModel() { XmlTranslationsDocument = XDocument.Load(fullResxFile) };
+    }
+
+    return posClientTranslationModel;
+  }
+
+  [Obsolete("DeserializeFromResxFile is deprecated, please use LoadXmlFromRexsFile instead.")]
+  public IPosClientTranslationModel? DeserializeFromRexsFile(string fullResxFile)
+  {
+    PosClientModel? posClientTranslationModel = null;
+
+    if ((fullResxFile is not null) && File.Exists(fullResxFile))
+    {
+      string xmlString = File.ReadAllText(fullResxFile);
       // Create XML Serializer
       XmlSerializer serializer = new(typeof(XmlPosClientData));
       // Create a StringReader with the value from the file
@@ -22,7 +36,7 @@ public class POSClientResxResourceProvider : IPOSClientResxResourceProvider
         XmlPosClientData? xmldata = (XmlPosClientData?)serializer.Deserialize(stringReader);
         if (xmldata is not null)
         {
-          posClientTranslationModel = new();
+          posClientTranslationModel = new PosClientModel();
           if (xmldata.Resheaders is not null)
           {
             foreach (XmlResheader xmlResheader in xmldata.Resheaders)
@@ -52,7 +66,7 @@ public class POSClientResxResourceProvider : IPOSClientResxResourceProvider
               posClientTranslationModel.AddTranslation(
                 new Translation()
                 {
-                  Key = xmlTranslation.Key, Text = xmlTranslation.Text, Space = xmlTranslation.Space
+                  Key = xmlTranslation.Key ??= string.Empty, Text = xmlTranslation.Text ??= string.Empty, Space = xmlTranslation.Space
                 });
             }
           }

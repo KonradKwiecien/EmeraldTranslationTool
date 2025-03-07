@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <metadata name="EnglishName" xml:space="preserve">
+    <value>English</value>
+  </metadata>
+  <data name="TestId.Text" xml:space="preserve">
+    <value>Test1
+  Test2
+3Text</value>
+  </data>
+</root>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Documents;
 using System;
+using System.Reflection;
 using System.Windows.Input;
 using TranslationTool.Data;
 using TranslationTool.Model;
@@ -14,7 +15,7 @@ namespace TranslationTool.ViewModel
     private readonly IPOSClientResxResourceProvider _posClientResxResourceProvider;
     private bool _comboBoxResxFileVisibility;
 
-    public PosClientTranslationModel? PosClientTranslation { get; private set; }
+    public IPosClientTranslationModel? PosClientTranslationCoreModel { get; private set; }
     public IPOSClientResxResourceProvider PosClientResxResourceProvider { get => _posClientResxResourceProvider; }
 
     public bool ComboBoxResxFileVisibility
@@ -38,9 +39,16 @@ namespace TranslationTool.ViewModel
       OpenResxFileCommand = new DelegateCommand(OpenResxFileAsync);
     }
 
-    public void DeserializeFromXml(string xmlFile)
+    [Obsolete("DeserializeFromResxFile is deprecated, please use LoadXmlFromRexsFile instead.")]
+    public void DeserializeFromResxFile(string resxFile)
     {
-      PosClientTranslation = _posClientResxResourceProvider.LoadRexsFile(xmlFile);
+      // Deserialize and load PosModel
+      PosClientTranslationCoreModel = _posClientResxResourceProvider.DeserializeFromRexsFile(resxFile);
+    }
+
+    public void LoadXmlFromRexsFile(string resxFile)
+    {
+      PosClientTranslationCoreModel = _posClientResxResourceProvider.LoadXmlFromRexsFile(resxFile);
     }
 
     private async void OpenResxFileAsync(object? parameter)

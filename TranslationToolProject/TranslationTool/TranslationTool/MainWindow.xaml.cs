@@ -1,5 +1,8 @@
 using Microsoft.UI.Xaml;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
 using TranslationTool.Renderer;
 using TranslationTool.ViewModel;
 
@@ -23,11 +26,17 @@ public sealed partial class MainWindow : Window
 
   private void Root_Loaded(object sender, RoutedEventArgs e)
   {
-    ViewModel.DeserializeFromXml($@"{AppContext.BaseDirectory}\..\..\..\..\..\..\..\..\TestFiles\Core\POSClient.en-US.POSClient.en-US.xml");
+    //ViewModel.DeserializeFromResxFile($@"{AppContext.BaseDirectory}\..\..\..\..\..\..\..\..\TestFiles\Core\POSClient.en-US.POSClient.en-US.xml");
 
-    if (ViewModel.PosClientTranslation is not null)
+    string normalizedPath = Path.GetFullPath($@"{AppContext.BaseDirectory}\..\..\..\..\..\..\..\..\..\TranslationToolProject\TestFiles\Core\POSClient.en-US.POSClient.en-US.xml");
+    ViewModel.LoadXmlFromRexsFile(normalizedPath);
+
+    if (ViewModel.PosClientTranslationCoreModel is not null)
     {
-      _translationFormatRenderer.FormatTranslations(ResxFileTextBlock, ViewModel.PosClientTranslation);
+      List<string> xmlElements = ["resheader", "metadata", "value"];
+      List<string> xmlAttributes = ["name", "xml:space"];
+      _translationFormatRenderer.FormatTranslations(ResxFileTextBlock, ViewModel.PosClientTranslationCoreModel?.XmlTranslationsDocument,
+                                                    xmlElements, xmlAttributes);
     }
   }
 
@@ -36,10 +45,13 @@ public sealed partial class MainWindow : Window
     root.RequestedTheme = root.RequestedTheme == ElementTheme.Light
      ? ElementTheme.Dark : ElementTheme.Light;
 
-    if (ViewModel.PosClientTranslation is not null)
+    if (ViewModel.PosClientTranslationCoreModel is not null)
     {
       ResxFileTextBlock.Text = string.Empty;
-      _translationFormatRenderer.FormatTranslations(ResxFileTextBlock, ViewModel.PosClientTranslation);
+      List<string> xmlElements = ["resheader", "metadata", "value"];
+      List<string> xmlAttributes = ["name", "xml:space"];
+      _translationFormatRenderer.FormatTranslations(ResxFileTextBlock, ViewModel.PosClientTranslationCoreModel?.XmlTranslationsDocument,
+                                                    xmlElements, xmlAttributes);
     }
   }
 }

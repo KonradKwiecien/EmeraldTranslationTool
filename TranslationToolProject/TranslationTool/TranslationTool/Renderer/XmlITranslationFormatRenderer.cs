@@ -8,17 +8,86 @@ using System.Xml;
 using TranslationTool.Model;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Text;
 using Microsoft.UI;
-using Microsoft.Windows.Storage;
 using Microsoft.UI.Xaml;
 using Windows.UI;
+using System.Xml.Linq;
+using System.Collections;
 using System.Linq;
 
 namespace TranslationTool.Renderer;
 public class XmlITranslationFormatRenderer : ITranslationFormatRenderer
 {
-  public void FormatTranslations(TextBlock textBlock, PosClientTranslationModel posClientTranslationModel)
+
+  public void FormatTranslations(TextBlock textBlock, XDocument? xmlDocument,
+                                 List<string> xmlElements, List<string> xmlAttribute)
+  {
+    if (xmlDocument == null)
+    {
+      return;
+    }
+
+    Color elementColor = textBlock.ActualTheme == ElementTheme.Light ? Colors.DeepSkyBlue : Colors.LightSkyBlue;
+    Color attributeNameColor = textBlock.ActualTheme == ElementTheme.Light ? Colors.Red : Colors.Red;
+    Color attributeValueColor = textBlock.ActualTheme == ElementTheme.Light ? Colors.Yellow : Colors.DarkGreen;
+
+    List<string> xmlStartElements = xmlElements.Select(element => $"<{element}>").ToList();
+    List<string> xmlEndElements = xmlElements.Select(element => $"</{element}>").ToList();
+    List<string> xmlStartAttributes = xmlAttribute.Select(element => $"<{element}>").ToList();
+
+    string[] xmlDocToString = xmlDocument.ToString().Split(Environment.NewLine);
+    string myStrings = "fghjK";
+    string checkThis = "abc";
+
+    if (myStrings.Any(checkThis.Contains))
+    { }
+
+    bool xmlElementOpened = false;
+    // bool newLineAdded;
+    foreach (string line in xmlDocToString)
+    {
+      //newLineAdded = false;
+      string? lineToFormat = null;
+      string startXmlElement = string.Empty, endXmlElement = string.Empty;
+      for (int i = 0; i < xmlElements.Count; i++)
+      {
+        if (line.TrimStart().StartsWith(xmlStartElements[i]))
+        {
+          lineToFormat = line;
+          xmlElementOpened = true;
+          startXmlElement = lineToFormat[..(lineToFormat.IndexOf(xmlStartElements[i]) + xmlStartElements[i].Length)];
+          lineToFormat = lineToFormat[startXmlElement.Length..];
+        }
+        if (line.EndsWith(xmlEndElements[i]))
+        {
+          xmlElementOpened = false;
+          endXmlElement = xmlEndElements[i];
+          lineToFormat = (lineToFormat ??= line)[..^xmlEndElements[i].Length];
+        }
+
+        if (lineToFormat is not null)
+        {
+          break;
+        }
+      }
+
+      if (lineToFormat is not null || xmlElementOpened)
+      {
+        textBlock.Inlines.Add(new Run() { Text = startXmlElement });
+        textBlock.Inlines.Add(new Run() { Text = lineToFormat ?? line, Foreground = new SolidColorBrush(elementColor)/*, FontWeight = FontWeights.Bold */});
+        textBlock.Inlines.Add(new Run() { Text = endXmlElement });
+      } else
+      {
+        // No formatting needed
+        textBlock.Inlines.Add(new Run() { Text = line });
+      }
+      textBlock.Inlines.Add(new LineBreak());
+    }
+
+  }
+
+  [Obsolete("FormatTranslations(TextBlock, IPosClientTranslationModel) is deprecated, please use FormatTranslations(TextBlock, XMLDocument) instead.")]
+  public void FormatTranslations(TextBlock textBlock, IPosClientTranslationModel posClientTranslationModel)
   {
     // Create empty namespaces with empty value
     XmlSerializerNamespaces emptyNamespaces = new XmlSerializerNamespaces();
@@ -30,7 +99,7 @@ public class XmlITranslationFormatRenderer : ITranslationFormatRenderer
       OmitXmlDeclaration = true,
     };
 
-    XmlPosClientData xmlData = new XmlPosClientData(posClientTranslationModel);
+    XmlPosClientData xmlData = new XmlPosClientData((PosClientModel)posClientTranslationModel);
 
     HashSet<string> attributeNameList = new();
     HashSet<string> elementNameList = new();
@@ -114,11 +183,6 @@ public class XmlITranslationFormatRenderer : ITranslationFormatRenderer
             break;
           }
         }
-
-        //List<string>? parts;
-        //string[] separatingStrings = attributeNameList.ToArray<string>();
-        //  line.Split(separatingStrings, StringSplitOptions.None);
-       
       }
     }
   }
