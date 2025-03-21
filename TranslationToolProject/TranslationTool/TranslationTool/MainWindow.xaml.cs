@@ -33,9 +33,10 @@ public sealed partial class MainWindow : Window
 
     if (ViewModel.PosClientTranslationCoreModel is not null)
     {
-      List<string> xmlElements = ["resheader", "metadata", "value"];
-      List<string> xmlAttributes = ["name", "xml:space"];
-      _translationFormatRenderer.FormatTranslations(ResxFileTextBlock, ViewModel.PosClientTranslationCoreModel?.XmlTranslationsDocument,
+      List<string> xmlElements = ["value"];
+      List<string> xmlAttributes = ["version", "encoding", "name", "xml:space"];
+      _translationFormatRenderer.FormatTranslations(ResxFileTextBlock,
+                                                    ViewModel.PosClientTranslationCoreModel?.XmlTranslationsDocument,
                                                     xmlElements, xmlAttributes);
     }
   }
@@ -45,14 +46,14 @@ public sealed partial class MainWindow : Window
     root.RequestedTheme = root.RequestedTheme == ElementTheme.Light
      ? ElementTheme.Dark : ElementTheme.Light;
 
-    if (ViewModel.PosClientTranslationCoreModel is not null)
-    {
-      ResxFileTextBlock.Text = string.Empty;
-      List<string> xmlElements = ["resheader", "metadata", "value"];
-      List<string> xmlAttributes = ["name", "xml:space"];
-      _translationFormatRenderer.FormatTranslations(ResxFileTextBlock, ViewModel.PosClientTranslationCoreModel?.XmlTranslationsDocument,
-                                                    xmlElements, xmlAttributes);
-    }
+    //if (ViewModel.PosClientTranslationCoreModel is not null)
+    //{
+    //  ResxFileTextBlock.Text = string.Empty;
+    //  List<string> xmlElements = ["value"];
+    //  List<string> xmlAttributes = ["name", "xml:space"];
+    //  _translationFormatRenderer.FormatTranslations(ResxFileTextBlock, ViewModel.PosClientTranslationCoreModel?.XmlTranslationsDocument,
+    //                                                xmlElements, xmlAttributes);
+    //}
   }
 }
 

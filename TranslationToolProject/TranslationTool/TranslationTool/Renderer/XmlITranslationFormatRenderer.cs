@@ -14,76 +14,94 @@ using Windows.UI;
 using System.Xml.Linq;
 using System.Collections;
 using System.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TranslationTool.Renderer;
 public class XmlITranslationFormatRenderer : ITranslationFormatRenderer
 {
-
   public void FormatTranslations(TextBlock textBlock, XDocument? xmlDocument,
-                                 List<string> xmlElements, List<string> xmlAttribute)
+                               List<string> xmlElements, List<string> xmlAttribute)
   {
     if (xmlDocument == null)
     {
       return;
     }
 
+    Color fordegroundColor;
     Color elementColor = textBlock.ActualTheme == ElementTheme.Light ? Colors.DeepSkyBlue : Colors.LightSkyBlue;
-    Color attributeNameColor = textBlock.ActualTheme == ElementTheme.Light ? Colors.Red : Colors.Red;
-    Color attributeValueColor = textBlock.ActualTheme == ElementTheme.Light ? Colors.Yellow : Colors.DarkGreen;
+    Color attributeColor = textBlock.ActualTheme == ElementTheme.Light ? Colors.Red : Colors.Red;
 
     List<string> xmlStartElements = xmlElements.Select(element => $"<{element}>").ToList();
     List<string> xmlEndElements = xmlElements.Select(element => $"</{element}>").ToList();
-    List<string> xmlStartAttributes = xmlAttribute.Select(element => $"<{element}>").ToList();
+    List<string> xmlStartAttributes = xmlAttribute.Select(attribute => $" {attribute}=\"").ToList();
 
     string[] xmlDocToString = xmlDocument.ToString().Split(Environment.NewLine);
-    string myStrings = "fghjK";
-    string checkThis = "abc";
-
-    if (myStrings.Any(checkThis.Contains))
-    { }
 
     bool xmlElementOpened = false;
-    // bool newLineAdded;
     foreach (string line in xmlDocToString)
     {
-      //newLineAdded = false;
-      string? lineToFormat = null;
-      string startXmlElement = string.Empty, endXmlElement = string.Empty;
-      for (int i = 0; i < xmlElements.Count; i++)
-      {
-        if (line.TrimStart().StartsWith(xmlStartElements[i]))
-        {
-          lineToFormat = line;
-          xmlElementOpened = true;
-          startXmlElement = lineToFormat[..(lineToFormat.IndexOf(xmlStartElements[i]) + xmlStartElements[i].Length)];
-          lineToFormat = lineToFormat[startXmlElement.Length..];
-        }
-        if (line.EndsWith(xmlEndElements[i]))
-        {
-          xmlElementOpened = false;
-          endXmlElement = xmlEndElements[i];
-          lineToFormat = (lineToFormat ??= line)[..^xmlEndElements[i].Length];
-        }
+      string textNotFormattedStart = string.Empty, textNotFormattedEnd = string.Empty;
+      string? formattedText = null;
 
-        if (lineToFormat is not null)
-        {
-          break;
-        }
-      }
+      string? firstAttribute = xmlStartAttributes
+               .Select(Word => new { Word, Index = line.IndexOf(Word) })
+               .Where(p => p.Index >= 0)
+               .OrderBy(p => p.Index)
+               .Select(p => p.Word)
+               .FirstOrDefault();
 
-      if (lineToFormat is not null || xmlElementOpened)
+      if (firstAttribute is not null)
       {
-        textBlock.Inlines.Add(new Run() { Text = startXmlElement });
-        textBlock.Inlines.Add(new Run() { Text = lineToFormat ?? line, Foreground = new SolidColorBrush(elementColor)/*, FontWeight = FontWeights.Bold */});
-        textBlock.Inlines.Add(new Run() { Text = endXmlElement });
+         fordegroundColor = attributeColor;
+        // At least one attribute was found.
+        textNotFormattedStart = line[..(line.IndexOf(firstAttribute) + 1)];
+        formattedText = line[(line.IndexOf(firstAttribute) + 1)..^1];
+        textNotFormattedEnd = line[^1..];
       } else
       {
-        // No formatting needed
+        fordegroundColor = elementColor;
+        // Check value for the XML elements-
+        for (int i = 0; i < xmlElements.Count; i++)
+        {
+          string[] tokens = line.Split(xmlStartElements[i]);
+          if (line.TrimStart().StartsWith(xmlStartElements[i]))
+          {
+            // Start XML element was found
+            formattedText = line;
+            xmlElementOpened = true;
+            textNotFormattedStart = formattedText[..(formattedText.IndexOf(xmlStartElements[i]) + xmlStartElements[i].Length)];
+            formattedText = formattedText[textNotFormattedStart.Length..];
+          }
+          if (xmlElementOpened && line.EndsWith(xmlEndElements[i]))
+          {
+            // End XML element was found
+            xmlElementOpened = false;
+            textNotFormattedEnd = xmlEndElements[i];
+            formattedText = (formattedText ??= line)[..^xmlEndElements[i].Length];
+            // It must be the last xml element in the line - we don't need any check more.
+            break;
+          }
+          if ((formattedText is not null) || xmlElementOpened)
+          {
+            break;
+          }
+        }
+      } // Check XML elements
+
+      if ((formattedText is not null) || xmlElementOpened)
+      {
+        // Formatting needed
+        textBlock.Inlines.Add(new Run() { Text = textNotFormattedStart });
+        textBlock.Inlines.Add(new Run() { Text = formattedText ?? line, Foreground = new SolidColorBrush(fordegroundColor)/*, FontWeight = FontWeights.Bold */});
+        textBlock.Inlines.Add(new Run() { Text = textNotFormattedEnd });
+      } else
+      {
+        // No formatting for XML element was found
         textBlock.Inlines.Add(new Run() { Text = line });
       }
-      textBlock.Inlines.Add(new LineBreak());
-    }
 
+      textBlock.Inlines.Add(new LineBreak());
+    } // for each line
   }
 
   [Obsolete("FormatTranslations(TextBlock, IPosClientTranslationModel) is deprecated, please use FormatTranslations(TextBlock, XMLDocument) instead.")]
