@@ -6,12 +6,12 @@
   <metadata name="EnglishName" xml:space="preserve">
     <value>English</value>
   </metadata>
-  <data name="TestId.Text" xml:space="preserve">
+  <data name="TestId1.Text" xml:space="preserve">
     <value>Test1
   Test2
 3Text</value>
   </data>
-  <data name="TestId.Text" xml:space="preserve">
+  <data name="TestId2.Text" xml:space="preserve">
     <value>
 		  Test Text
 		</value>

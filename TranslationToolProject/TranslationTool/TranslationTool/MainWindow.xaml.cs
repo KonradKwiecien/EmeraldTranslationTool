@@ -1,8 +1,9 @@
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Serialization;
+using System.Linq;
 using TranslationTool.Renderer;
 using TranslationTool.ViewModel;
 
@@ -26,19 +27,7 @@ public sealed partial class MainWindow : Window
 
   private void Root_Loaded(object sender, RoutedEventArgs e)
   {
-    //ViewModel.DeserializeFromResxFile($@"{AppContext.BaseDirectory}\..\..\..\..\..\..\..\..\TestFiles\Core\POSClient.en-US.POSClient.en-US.xml");
-
-    string normalizedPath = Path.GetFullPath($@"{AppContext.BaseDirectory}\..\..\..\..\..\..\..\..\..\TranslationToolProject\TestFiles\Core\POSClient.en-US.POSClient.en-US.xml");
-    ViewModel.LoadXmlFromRexsFile(normalizedPath);
-
-    if (ViewModel.PosClientTranslationCoreModel is not null)
-    {
-      List<string> xmlElements = ["value"];
-      List<string> xmlAttributes = ["version", "encoding", "name", "xml:space"];
-      _translationFormatRenderer.FormatTranslations(ResxFileTextBlock,
-                                                    ViewModel.PosClientTranslationCoreModel?.XmlTranslationsDocument,
-                                                    xmlElements, xmlAttributes);
-    }
+    LoadTestXMLFile();
   }
 
   private void TheneSwitch_Toggled(object sender, RoutedEventArgs e)
@@ -46,14 +35,28 @@ public sealed partial class MainWindow : Window
     root.RequestedTheme = root.RequestedTheme == ElementTheme.Light
      ? ElementTheme.Dark : ElementTheme.Light;
 
-    //if (ViewModel.PosClientTranslationCoreModel is not null)
-    //{
-    //  ResxFileTextBlock.Text = string.Empty;
-    //  List<string> xmlElements = ["value"];
-    //  List<string> xmlAttributes = ["name", "xml:space"];
-    //  _translationFormatRenderer.FormatTranslations(ResxFileTextBlock, ViewModel.PosClientTranslationCoreModel?.XmlTranslationsDocument,
-    //                                                xmlElements, xmlAttributes);
-    //}
+    LoadTestXMLFile();
+  }
+
+  private void LoadTestXMLFile()
+  {
+    //ViewModel.DeserializeFromResxFile($@"{AppContext.BaseDirectory}\..\..\..\..\..\..\..\..\TestFiles\Core\POSClient.en-US.POSClient.en-US.xml");
+
+    string normalizedPath = Path.GetFullPath($@"{AppContext.BaseDirectory}\..\..\..\..\..\..\..\..\..\TranslationToolProject\TestFiles\Core\POSClient.en-US.POSClient.en-US.xml");
+    ViewModel.LoadXmlFromRexsFile(normalizedPath);
+
+    if (ViewModel.PosClientTranslationCoreModel is not null)
+    {
+      ResxFileTextBlock.Text = null;
+      List<string> xmlElements = ["value"];
+      List<string> xmlAttributes = ["name", "xml:space"];
+
+      _translationFormatRenderer.SetColorForAttributes(ElementTheme.Light, xmlAttributes.First(), Colors.Crimson);
+      _translationFormatRenderer.SetColorForAttributes(ElementTheme.Dark, xmlAttributes.First(), Colors.Orange);
+      _translationFormatRenderer.FormatTranslations(ResxFileTextBlock,
+                                                    ViewModel.PosClientTranslationCoreModel?.XmlTranslationsDocument,
+                                                    xmlElements, xmlAttributes);
+    }
   }
 }
 

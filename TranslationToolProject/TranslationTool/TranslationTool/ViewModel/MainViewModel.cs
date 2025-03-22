@@ -1,6 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Documents;
 using System;
-using System.Reflection;
 using System.Windows.Input;
 using TranslationTool.Data;
 using TranslationTool.Model;
