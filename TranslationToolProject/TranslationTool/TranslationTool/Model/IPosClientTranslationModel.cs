@@ -6,6 +6,7 @@ namespace TranslationTool.Model;
 public interface IPosClientTranslationModel
 {
   XDocument? XmlTranslationsDocument { get; }
+  string[]? XMLlTranslationsFile { get; }
   List<ITranslation>? Translations { get; }
 }
 

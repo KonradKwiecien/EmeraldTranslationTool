@@ -45,9 +45,14 @@ namespace TranslationTool.ViewModel
       PosClientTranslationCoreModel = _posClientResxResourceProvider.DeserializeFromRexsFile(resxFile);
     }
 
-    public void LoadXmlFromRexsFile(string resxFile)
+    public void LoadToXDocumentFromRexsFile(string resxFile)
     {
-      PosClientTranslationCoreModel = _posClientResxResourceProvider.LoadXmlFromRexsFile(resxFile);
+      PosClientTranslationCoreModel = _posClientResxResourceProvider.LoadToXDocumentFromRexsFile(resxFile);
+    }
+
+    public void LoadAsTextFileFromRexsFile(string resxFile)
+    {
+      PosClientTranslationCoreModel = _posClientResxResourceProvider.LoadAsTextFileFromRexsFile(resxFile);
     }
 
     private async void OpenResxFileAsync(object? parameter)

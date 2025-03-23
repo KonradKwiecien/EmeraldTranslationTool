@@ -9,5 +9,7 @@ public interface IPOSClientResxResourceProvider
   [Obsolete("DeserializeFromResxFile is deprecated, please use LoadXmlFromRexsFile instead.")]
   IPosClientTranslationModel? DeserializeFromRexsFile(string fullResxFile);
 
-  IPosClientTranslationModel? LoadXmlFromRexsFile(string fullResxFile);
+  IPosClientTranslationModel? LoadToXDocumentFromRexsFile(string fullResxFile);
+
+  IPosClientTranslationModel? LoadAsTextFileFromRexsFile(string fullResxFile);
 }

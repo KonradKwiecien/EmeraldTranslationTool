@@ -32,19 +32,18 @@ public class XmlITranslationFormatRenderer : ITranslationFormatRenderer
     }
   }
 
-  public void FormatTranslations(TextBlock textBlock, XDocument? xmlDocument,
+  public void FormatTranslations(TextBlock textBlock, string[]? xmlLines,
                                  List<string> xmlElementList, List<string> xmlAttributeList)
   {
-    if (xmlDocument == null)
+    if (xmlLines == null)
     {
       return;
     }
 
     Color elementColor = (textBlock.ActualTheme == ElementTheme.Light) ? Colors.MediumBlue : Colors.RoyalBlue;
-    string[] xmlDocToString = xmlDocument.ToString().Split(Environment.NewLine);
 
     bool xmlElementOpened = false;
-    foreach (string line in xmlDocToString)
+    foreach (string line in xmlLines)
     {
       string textNotFormattedStart = string.Empty, textNotFormattedEnd = string.Empty;
 
@@ -59,9 +58,9 @@ public class XmlITranslationFormatRenderer : ITranslationFormatRenderer
         string[] textWithoutFormat = line.Split(attributesToFormat.Select(t => t.Text).ToArray(), StringSplitOptions.None);
         for (int i = 0; i < attributesToFormat.Length; i++)
         {
-          Color attrColor = (textBlock.ActualTheme == ElementTheme.Light) ? Colors.DarkGray : Colors.Gray;
+          Color attrColor = (textBlock.ActualTheme == ElementTheme.Light) ? Colors.DimGray : Colors.DarkGray;
           Color customizedColor;
-          if (attributeColorDictionary.ContainsKey(textBlock.ActualTheme) 
+          if (attributeColorDictionary.ContainsKey(textBlock.ActualTheme)
             && attributeColorDictionary[textBlock.ActualTheme].TryGetValue(attributesToFormat[i].ArttributeName, out customizedColor))
           {
             attrColor = customizedColor;

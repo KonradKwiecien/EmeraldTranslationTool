@@ -12,7 +12,7 @@ public interface ITranslationFormatRenderer
 {
   void SetColorForAttributes(ElementTheme theme, string attrName, Color attrColor);
 
-  void FormatTranslations(TextBlock textBlock, XDocument? xmlDocument,
+  void FormatTranslations(TextBlock textBlock, string[]? xmlLines,
                           List<string> xmlElements, List<string> xmlAttribute);
 
   [Obsolete("FormatTranslations(TextBlock, IPosClientTranslationModel) is deprecated, please use FormatTranslations(TextBlock, XMLDocument) instead.")]

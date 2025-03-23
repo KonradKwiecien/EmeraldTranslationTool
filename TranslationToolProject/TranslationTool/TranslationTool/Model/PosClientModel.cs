@@ -36,6 +36,8 @@ public class PosClientModel : IPosClientTranslationModel
 
   public XDocument? XmlTranslationsDocument => throw new NotImplementedException();
   public List<ITranslation>? Translations { get => _translatonList; }
+
+  public string[]? XMLlTranslationsFile => throw new NotImplementedException();
   #endregion
 
   public void AddResheader(Resheader resheader)

@@ -1,8 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using TranslationTool.Data;
 using TranslationTool.Renderer;
 using TranslationTool.ViewModel;
+using Windows.Graphics;
+using WinRT.Interop;
 
 namespace TranslationTool;
 

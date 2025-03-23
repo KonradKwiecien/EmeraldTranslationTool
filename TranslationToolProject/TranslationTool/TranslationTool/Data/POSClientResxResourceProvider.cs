@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using TranslationTool.Model;
@@ -8,12 +9,23 @@ using TranslationTool.Model;
 namespace TranslationTool.Data;
 public class POSClientResxResourceProvider : IPOSClientResxResourceProvider
 {
-  public IPosClientTranslationModel? LoadXmlFromRexsFile(string fullResxFile)
+  public IPosClientTranslationModel? LoadToXDocumentFromRexsFile(string fullResxFile)
   {
     IPosClientTranslationModel? posClientTranslationModel = null;
     if (File.Exists(fullResxFile))
     {
       posClientTranslationModel = new PosClientTranslationModel() { XmlTranslationsDocument = XDocument.Load(fullResxFile) };
+    }
+
+    return posClientTranslationModel;
+  }
+
+  public IPosClientTranslationModel? LoadAsTextFileFromRexsFile(string fullResxFile)
+  {
+    IPosClientTranslationModel? posClientTranslationModel = null;
+    if (File.Exists(fullResxFile))
+    {
+      posClientTranslationModel = new PosClientTranslationModel() { XMLlTranslationsFile = File.ReadLines(fullResxFile).ToArray() };
     }
 
     return posClientTranslationModel;

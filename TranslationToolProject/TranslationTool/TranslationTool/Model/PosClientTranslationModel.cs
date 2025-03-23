@@ -2,28 +2,42 @@
 using System.Xml.Linq;
 
 namespace TranslationTool.Model;
+
 public class PosClientTranslationModel : IPosClientTranslationModel
 {
-
+  private XDocument? _xmlTranslationsXDocument;
+  private string[]? _xmlTranslationsFile;
   private List<ITranslation>? _translatonList;
-  private XDocument? _xmlTranslations;
 
-  public XDocument? XmlTranslationsDocument
+  public string[]? XMLlTranslationsFile
   {
-    get => _xmlTranslations;
+    get => _xmlTranslationsFile;
     set
     {
-      _xmlTranslations = value;
+      _xmlTranslationsFile = value;
       UpdateTranslationsList();
-
     }
   }
 
-  public List<ITranslation>? Translations { get => _translatonList; }
+  public XDocument? XmlTranslationsDocument
+  {
+    get => _xmlTranslationsXDocument;
+    set
+    {
+      _xmlTranslationsXDocument = value;
+      UpdateTranslationsList();
+    }
+  }
+
+  public List<ITranslation>? Translations
+  {
+    get => _translatonList;
+    private set => _translatonList = value;
+  }
 
   private void UpdateTranslationsList()
   {
-    if(_xmlTranslations is null)
+    if (_xmlTranslationsXDocument is null)
     {
       return;
     }
