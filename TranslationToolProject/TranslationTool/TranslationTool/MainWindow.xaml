@@ -73,16 +73,66 @@
                     HorizontalAlignment="Right" Toggled="TheneSwitch_Toggled"/>
     </Grid>
 
-    <ScrollView Grid.Row="2"
-                  HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto" 
-                  VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-      <TextBlock x:Name="ResxFileTextBlock" Margin="10" FontFamily="Courier New"
-               TextWrapping="NoWrap" IsTextSelectionEnabled="True"/>
-    </ScrollView>
+    <!-- Preview panels -->
+    <Grid x:Name="previewPanelsGrid" Grid.Row="2">
+      <Grid Background="Gray">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="50*"/>
+          <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left review panel -->
+        <Grid Grid.Column="0">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+          </Grid.RowDefinitions>
+
+          <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <ComboBox x:Name="cbAbc" Margin="5" IsEditable="True" Width="150">
+              <ComboBoxItem Content="Option 1"/>
+              <ComboBoxItem Content="Option 2"/>
+              <ComboBoxItem Content="Option 3"/>
+            </ComboBox>
+          </StackPanel>
+
+          <ScrollView Grid.Row="1" Margin="5" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                      HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" 
+                      BorderBrush="White" BorderThickness="1">
+            <TextBlock x:Name="ResxFileTextBlock" Margin="5" TextWrapping="NoWrap" IsTextSelectionEnabled="True"/>
+          </ScrollView>
+        </Grid>
+
+        <!-- Right review panel -->
+        <Grid Grid.Column="1">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+          </Grid.RowDefinitions>
+
+          <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <ComboBox Margin="5" Width="200" Height="30">
+              <ComboBoxItem Content="Option 1"/>
+              <ComboBoxItem Content="Option 2"/>
+              <ComboBoxItem Content="Option 3"/>
+            </ComboBox>
+          </StackPanel>
+
+          <ScrollView Grid.Row="1" Margin="5" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                      HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" 
+                      BorderBrush="White" BorderThickness="1">
+            <TextBlock x:Name="CustomizedFileTextBlock" Margin="5" TextWrapping="NoWrap" IsTextSelectionEnabled="True">
+              Second XML file
+            </TextBlock>
+          </ScrollView>
+        </Grid>
+
+      </Grid>
+    </Grid>
 
     <!-- Statusbar -->
     <Border Grid.Row="3" Background="{StaticResource StatusbarBackgroundBrush}">
-      <TextBlock Text=" (c) Translation Tool 2025" Foreground="White" Margin="5"/>
+      <TextBlock Text=" (c) Translation Tool 2025" Foreground="White" Margin="5 0 5 0" FontSize="10"/>
     </Border>
   </Grid>
 </Window>

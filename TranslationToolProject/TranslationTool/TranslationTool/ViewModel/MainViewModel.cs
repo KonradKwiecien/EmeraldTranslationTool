@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Documents;
 using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using TranslationTool.Data;
 using TranslationTool.Model;
@@ -13,6 +14,8 @@ namespace TranslationTool.ViewModel
   {
     private readonly IPOSClientResxResourceProvider _posClientResxResourceProvider;
     private bool _comboBoxResxFileVisibility;
+
+    private List<string> _resxFiles = new();
 
     public IPosClientTranslationModel? PosClientTranslationCoreModel { get; private set; }
     public IPOSClientResxResourceProvider PosClientResxResourceProvider { get => _posClientResxResourceProvider; }

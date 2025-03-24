@@ -71,10 +71,10 @@ public sealed partial class MainWindow : Window
   {
     //ViewModel.DeserializeFromResxFile($@"{AppContext.BaseDirectory}\..\..\..\..\..\..\..\..\TestFiles\Core\POSClient.en-US.POSClient.en-US.xml");
 
-    string fileName = "POSClient.en-US.POSClient.en-USsmall.xml";
-    //string fileName = "POSClient.en-US.POSClient.en-US.resx";
-    string normalizedPath = Path.GetFullPath($@"{AppContext.BaseDirectory}\..\..\..\..\..\..\..\..\..\TranslationToolProject\TestFiles\Core\{fileName}");
-    //ViewModel.LoadToXDocumentFromRexsFile(normalizedPath);
+    //string fileName = "POSClient.en-US.POSClient.en-USsmall.xml";
+    string fileName = "POSClient.en-US.POSClient.en-US.resx";
+    string normalizedPath = Path.GetFullPath($@"{AppContext.BaseDirectory}\..\..\..\..\..\..\..\..\TranslationToolProject\TestFiles\Core\{fileName}");
+    ViewModel.LoadToXDocumentFromRexsFile(normalizedPath);
     ViewModel.LoadAsTextFileFromRexsFile(normalizedPath);
 
     if (ViewModel.PosClientTranslationCoreModel is not null)
