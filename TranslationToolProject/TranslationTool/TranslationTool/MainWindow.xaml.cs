@@ -15,11 +15,11 @@ namespace TranslationTool;
 public sealed partial class MainWindow : Window
 {
   private bool centered;
-  private readonly ITranslationFormatRenderer _translationFormatRenderer;
+  private readonly ITranslationPreviewRendered _translationFormatRenderer;
 
   public MainViewModel ViewModel { get; }
 
-  public MainWindow(MainViewModel viewModel, ITranslationFormatRenderer translationFormatRenderer)
+  public MainWindow(MainViewModel viewModel, ITranslationPreviewRendered translationFormatRenderer)
   {
     this.InitializeComponent();
     this.Activated += MainWindow_Activated;
@@ -71,24 +71,32 @@ public sealed partial class MainWindow : Window
   {
     //ViewModel.DeserializeFromResxFile($@"{AppContext.BaseDirectory}\..\..\..\..\..\..\..\..\TestFiles\Core\POSClient.en-US.POSClient.en-US.xml");
 
-    //string fileName = "POSClient.en-US.POSClient.en-USsmall.xml";
-    string fileName = "POSClient.en-US.POSClient.en-US.resx";
+    string fileName = "POSClient.en-US.POSClient.en-USsmall.xml";
+    //string fileName = "POSClient.en-US.POSClient.en-US.resx";
     string normalizedPath = Path.GetFullPath($@"{AppContext.BaseDirectory}\..\..\..\..\..\..\..\..\TranslationToolProject\TestFiles\Core\{fileName}");
     ViewModel.LoadToXDocumentFromRexsFile(normalizedPath);
-    ViewModel.LoadAsTextFileFromRexsFile(normalizedPath);
+    //ViewModel.LoadAsTextFileFromRexsFile(normalizedPath);
 
     if (ViewModel.PosClientTranslationCoreModel is not null)
     {
-      ResxFileTextBlock.Text = null;
-      List<string> xmlElements = ["value"];
-      List<string> xmlAttributes = ["name", "xml:space"];
+      //ResxFileTextBlock.Text = null;
+      //List<string> xmlElements = ["value"];
+      //List<string> xmlAttributes = ["name", "xml:space"];
 
-      _translationFormatRenderer.SetColorForAttributes(ElementTheme.Light, xmlAttributes.First(), Colors.Crimson);
-      _translationFormatRenderer.SetColorForAttributes(ElementTheme.Dark, xmlAttributes.First(), Colors.Orange);
+      //_translationFormatRenderer.SetColorForAttributes(ElementTheme.Light, xmlAttributes.First(), Colors.Crimson);
+      //_translationFormatRenderer.SetColorForAttributes(ElementTheme.Dark, xmlAttributes.First(), Colors.Orange);
       //string[]? xmlFile = ViewModel.PosClientTranslationCoreModel?.XmlTranslationsDocument?.ToString().Split(Environment.NewLine);
-      string[]? xmlFile = ViewModel.PosClientTranslationCoreModel?.XMLlTranslationsFile;
+      //string[]? xmlFile = ViewModel.PosClientTranslationCoreModel?.XMLlTranslationsFile;
 
-      _translationFormatRenderer.FormatTranslations(ResxFileTextBlock, xmlFile, xmlElements, xmlAttributes);
+      //_translationFormatRenderer.FormatTranslations(ResxFileTextBlock, xmlFile, xmlElements, xmlAttributes);
+      //_translationFormatRenderer.FormatTranslations(ResxFileTextBlock, ViewModel.PosClientTranslationCoreModel?.XmlTranslationsDocument?, xmlElements, xmlAttributes);
+
+      RendererConfig rendererConfig = new("root");
+      rendererConfig.AddXmlElementsToRender(["resheader, data, value"]);
+      rendererConfig.AddXmlAttributeColors("name", Colors.Crimson, Colors.Orange);
+      rendererConfig.AddXmlValueColors("value", Colors.MediumBlue, Colors.RoyalBlue);
+      _translationFormatRenderer.SetConfig(rendererConfig);
+      _translationFormatRenderer.FormatTranslations(ResxFileTextBlock, ViewModel.PosClientTranslationCoreModel?.XmlTranslationsDocument);
     }
   }
 }

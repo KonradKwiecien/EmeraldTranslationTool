@@ -31,7 +31,7 @@ public partial class App : Application
     services.AddTransient<MainWindow>();
     services.AddTransient<MainViewModel>();
     services.AddTransient<IPOSClientResxResourceProvider, POSClientResxResourceProvider>();
-    services.AddTransient<ITranslationFormatRenderer, XmlITranslationFormatRenderer>();
+    services.AddTransient<ITranslationPreviewRendered, XMLTranslationPreviewRendered>();
   }
 
   protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
